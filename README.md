@@ -13,5 +13,13 @@ Om de demo applicatie te starten:
 
 python app.py
 ```
+# Login
+- Gebruikersnaam: admin 
+- Wachtwoord: admin
+
+# Bronnen
+- https://getbootstrap.com/
+- https://getbootstrap.com/docs/5.2/examples/
+
 
 

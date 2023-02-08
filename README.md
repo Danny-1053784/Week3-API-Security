@@ -4,7 +4,7 @@ Om Flask te kunnen starten zul je eerst de Flask packages moeten installeren. Wi
 ```
 pip install virtualenv
 virtualenv venv
-.\venv\sripts\activate
+.\venv\Scripts\activate
 pip install -r requirements.txt
 ```
 

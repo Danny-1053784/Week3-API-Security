@@ -56,4 +56,8 @@ def ShowImage():
  app = Flask(__name__, static_url_path='/static')
  return app
 
+@app.route('/aanwezigheid')
+def aanwezigheid():
+    return render_template('aanwezigheid.html')
+
 ShowImage()

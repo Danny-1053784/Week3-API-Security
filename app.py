@@ -48,6 +48,10 @@ def login():
             return redirect(url_for('index'))
 
 
+@app.route('/aanwezigheid')
+def aanwezigheid():
+    return render_template('aanwezigheid.html')
+
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
 
@@ -55,9 +59,5 @@ if __name__ == "__main__":
 def ShowImage():    
  app = Flask(__name__, static_url_path='/static')
  return app
-
-@app.route('/aanwezigheid')
-def aanwezigheid():
-    return render_template('aanwezigheid.html')
 
 ShowImage()

@@ -36,12 +36,12 @@ def index():
 @app.route('/login', methods=["POST", "GET"])
 def login():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        print(dbu.user_login(username, password))
-        if dbu.user_login(username, password):
-            session['username'] = username
-            
+        gebruikersnaam = request.form['gebruikersnaam']
+        wachtwoord = request.form['wachtwoord']
+        print(dbu.user_login(gebruikersnaam, wachtwoord))
+        if dbu.user_login(gebruikersnaam, wachtwoord):
+            session['username'] = gebruikersnaam
+           
             return render_template(
             "admin.html")
         else:

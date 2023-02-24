@@ -1,6 +1,6 @@
 import os
 import sqlite3
-
+from flask import session
 
 class UserDatabaseModel:
     """This class is a wrapper around the sqlite3 database. It provides a simple interface that maps methods
@@ -15,10 +15,13 @@ class UserDatabaseModel:
     def user_login(self,gebruikersnaam, wachtwoord):
             con = sqlite3.connect(self.user_database_file)
             cur = con.cursor()
-            cur.execute('Select gebruikersnaam,wachtwoord FROM docent WHERE gebruikersnaam=? and wachtwoord=?', (gebruikersnaam, wachtwoord))
+            cur.execute('Select docent_id,gebruikersnaam,wachtwoord FROM docent WHERE gebruikersnaam=? and wachtwoord=?', (gebruikersnaam, wachtwoord))
             
             result = cur.fetchone()
             if result:
+                docent_id = result[0]
+                print(docent_id)
+                session['docent_id'] = docent_id
             # checks to see if user exists in db (shows in terminal)
                 return True
             else:

@@ -1,1 +1,54 @@
-<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"> Logout </a>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Docent Dashboard</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/dashboard.css" type="text/css">
+  <link rel="stylesheet" href="/static/heroes.css" type="text/css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+<ul id="student_rooster_info">
+
+    <li> </li>
+    <li> </li>
+
+</body>
+</html>
+<script type="application/javascript">
+    function get_docent_rooster() {
+      $.ajax({
+        url: "/meeting",
+        type: "GET",
+        dataType: "json",
+        error: function (data) {
+          console.log("error" + data)
+        },
+        success: function (results) {
+  
+          $("#student_rooster_info").empty()
+          for (les of results) {
+            console.log(les)
+            $("#student_rooster_info").append('<li>' + les[3] + '<li>' + les[4] + '<li>' + les[5] + '<li>' + les[6])
+  
+          }
+        }
+  
+      })
+  
+  
+    }
+  
+  
+  
+    get_docent_rooster()
+    setInterval(get_docent_rooster, 1000)
+  </script>

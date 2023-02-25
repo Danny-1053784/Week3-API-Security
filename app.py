@@ -53,6 +53,10 @@ def meeting_docent():
     meeting_docent = dbm.get_les_docent(docent_id)
     return jsonify(meeting_docent)
 
+@app.route('/aanwezigheid')
+def aanwezigheid():
+    return render_template('aanwezigheid.html')
+
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
 

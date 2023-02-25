@@ -24,6 +24,10 @@ er staan tot nu toe 3 studenten in de database:
 2	Wouter	Oogjen	1052935@hr.nl
 
 
+## QR genereren
+alle actieve lessen waar een QR code voor is staat in de tabel `activeles`. Later gaan we dus op die id checken of iets actief is of niet.
+
+
 # Bronnen
 - https://getbootstrap.com/
 - https://getbootstrap.com/docs/5.2/examples/

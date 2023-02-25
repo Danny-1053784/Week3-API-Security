@@ -54,9 +54,12 @@ def meeting_docent():
     return jsonify(meeting_docent)
 
 # de pagina waar de qr code op komt te staan (Wouter)
-@app.route("/qrcode", methods=["GET"])
-def qrcode():
-    return render_template("qrcode.html")
+@app.route("/qrcode/<lesid>", methods=["GET", "POST"])
+def qrcode(lesid = None):
+    # De lesid is standaard null, maar als er een lesid wordt meegegeven, dan wordt die gebruikt
+    print(lesid)
+    # Ga naar qrcode.html en geef lesid mee
+    return render_template("qrcode.html", lesid=lesid)
 
 
 if __name__ == "__main__":

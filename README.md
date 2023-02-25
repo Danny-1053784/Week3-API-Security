@@ -13,9 +13,16 @@ Om de demo applicatie te starten:
 
 python app.py
 ```
-# Login
-- Gebruikersnaam: admin 
-- Wachtwoord: admin
+# Login docent
+- Gebruikersnaam: markhr
+- Wachtwoord: mark321!
+
+# Studenten 
+er staan tot nu toe 3 studenten in de database:
+0   Danny	van Schijndel	1053784@hr.nl
+1	Bryan	Booij	1025561@hr.nl
+2	Wouter	Oogjen	1052935@hr.nl
+
 
 # Bronnen
 - https://getbootstrap.com/

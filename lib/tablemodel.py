@@ -28,4 +28,8 @@ class DatabaseModel:
         # Note that this method returns 2 variables!
         return table_content, table_headers
 
-    
+    def get_les_docent(self, docent_id):
+        cursor = sqlite3.connect(self.database_file).cursor()
+        cursor.execute(f"SELECT * FROM les WHERE docent_id = {docent_id}")
+        docent = cursor.fetchall()
+        return docent

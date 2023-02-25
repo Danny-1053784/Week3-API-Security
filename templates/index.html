@@ -18,26 +18,30 @@
   </head>
   <body class="text-center">
     <!--login (Danny)  -->
-<main class="form-signin w-100 m-auto">
-  <form action="/login" method = "POST">
-       <!-- uses ShowImage function from app.py (Danny) -->
-    <img class="mb-4" src="/static/images/hrLogo.png" alt="" width="" height="">
+    <main class="form-signin w-100 m-auto">
+      <form action="/login" method = "POST">
+           <!-- uses ShowImage function from app.py (Danny) -->
+        <img class="mb-4" src="/static/images/hrLogo.png" alt="" width="" height="">
 
-    <div class="form-floating">
-      <input type="text" name="gebruikersnaam" class="form-control" id="floatingInput" placeholder="Gebruikersnaam" required>
-      <label for="floatingInput">Gebruikersnaam</label>
-    </div>
-    <div class="form-floating">
-      <input type="password"  name="wachtwoord"  class="form-control" id="floatingPassword" placeholder="Wachtwoord" required>
-      <label for="floatingPassword">Wachtwoord</label>
-    </div>
+        <div class="form-floating">
+    {#      <input type="text" name="gebruikersnaam" class="form-control" id="floatingInput" placeholder="Gebruikersnaam" required>#}
+            <!-- zet de bovenste aan voor productie/acceptatie maar voor ontwikkeling is de onderste handiger (Wouter) -->
+            <input type="text" name="gebruikersnaam" class="form-control" id="floatingInput" placeholder="Gebruikersnaam" required value="markhr">
+          <label for="floatingInput">Gebruikersnaam</label>
+        </div>
+        <div class="form-floating">
+    {#      <input type="password"  name="wachtwoord"  class="form-control" id="floatingPassword" placeholder="Wachtwoord" required>#}
+            <!-- zet de bovenste aan voor productie/acceptatie maar voor ontwikkeling is de onderste handiger (Wouter) -->
+            <input type="password"  name="wachtwoord"  class="form-control" id="floatingPassword" placeholder="Wachtwoord" required value="mark321!">
+          <label for="floatingPassword">Wachtwoord</label>
+        </div>
 
-  
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
 
-    
-  </form>
-</main>
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+
+
+      </form>
+    </main>
 
     
   </body>

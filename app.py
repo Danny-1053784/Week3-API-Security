@@ -53,6 +53,12 @@ def meeting_docent():
     meeting_docent = dbm.get_les_docent(docent_id)
     return jsonify(meeting_docent)
 
+# de pagina waar de qr code op komt te staan (Wouter)
+@app.route("/qrcode", methods=["GET"])
+def qrcode():
+    return render_template("qrcode.html")
+
+
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
 

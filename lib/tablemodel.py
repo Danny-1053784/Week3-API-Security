@@ -33,3 +33,10 @@ class DatabaseModel:
         cursor.execute(f"SELECT * FROM les WHERE docent_id = {docent_id}")
         docent = cursor.fetchall()
         return docent
+
+    # Dit is een functie die de les actief of niet zet op basis van de actief parameter (Wouter)
+    def update_les_actief(self, les_id, actief):
+        print("We zijn nu in de update_les_actief funtie en de les " + les_id + " wordt actief gezet")
+        cursor = sqlite3.connect(self.database_file).cursor()
+        cursor.execute(f"UPDATE les SET actief = {actief} WHERE les_id = {les_id}")
+        cursor.connection.commit()

@@ -58,6 +58,9 @@ def meeting_docent():
 def qrcode(lesid = None):
     # De lesid is standaard null, maar als er een lesid wordt meegegeven, dan wordt die gebruikt
     print(lesid)
+    # zet de les op actief
+    dbm.update_les_actief(lesid, 1)
+    print("De les " + lesid + " is actief gezet")
     # Ga naar qrcode.html en geef lesid mee
     return render_template("qrcode.html", lesid=lesid)
 

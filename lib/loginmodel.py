@@ -15,13 +15,15 @@ class UserDatabaseModel:
     def user_login(self,gebruikersnaam, wachtwoord):
             con = sqlite3.connect(self.user_database_file)
             cur = con.cursor()
-            cur.execute('Select docent_id,gebruikersnaam,wachtwoord FROM docent WHERE gebruikersnaam=? and wachtwoord=?', (gebruikersnaam, wachtwoord))
+            cur.execute('Select docent_id,gebruikersnaam,wachtwoord,voornaam FROM docent WHERE gebruikersnaam=? and wachtwoord=?', (gebruikersnaam, wachtwoord))
             
             result = cur.fetchone()
             if result:
                 docent_id = result[0]
+                docent_naam = result[3]
                 print(docent_id)
                 session['docent_id'] = docent_id
+                session['docent_naam'] = docent_naam
             # checks to see if user exists in db (shows in terminal)
                 return True
             else:

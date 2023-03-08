@@ -63,7 +63,23 @@
       fill: currentColor;
     }
 
-  
+    .nav-scroller {
+      position: relative;
+      z-index: 2;
+      height: 2.75rem;
+      overflow-y: hidden;
+    }
+
+    .nav-scroller .nav {
+      display: flex;
+      flex-wrap: nowrap;
+      padding-bottom: 1rem;
+      margin-top: -1px;
+      overflow-x: auto;
+      text-align: center;
+      white-space: nowrap;
+      -webkit-overflow-scrolling: touch;
+    }
   </style>
 
 </head>
@@ -85,19 +101,31 @@
         <div class="position-sticky pt-3 sidebar-sticky">
           <ul class="nav flex-column">
             <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">
+                <span data-feather="home" class="align-text-bottom"></span>
+                Les aanmaken
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="#">
                 <span data-feather="file" class="align-text-bottom"></span>
                 Aanwezigheid aanpassen
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/les-aanmaken">
+              <a class="nav-link" href="/aanwezigheid">
                 <span data-feather="aanwezigheid" class="align-text-bottom"></span>
-                Les aanmaken
+                QR link
               </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/les-aanmaken">
+                  <span data-feather="aanwezigheid" class="align-text-bottom"></span>
+                  Les aanmaken
+                </a>
+              </li>
           </ul>
-          
+
 
         </div>
       </nav>
@@ -112,55 +140,14 @@
     integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous">
   </script>
   
+
   {% include 'header.html' %}
-
-  <main>
-
-    <div class="px-4 py-5 my-5 text-center">
-
-      <h1 class="display-5 fw-bold">Rooster docent</h1>
-      <div class="col-lg-6 mx-auto">
-
-        <ul id="student_rooster_info">
-
-          <li> </li>
-          <li> </li>
-
-        </ul>
-
-      </div>
-    </div>
-
-  </main>
 
 </body>
 
 </html>
 
 <script type="application/javascript">
-  function get_docent_rooster() {
-    $.ajax({
-      url: "/meeting",
-      type: "GET",
-      dataType: "json",
-      error: function (data) {
-        console.log("error" + data)
-      },
-      success: function (results) {
-
-        $("#student_rooster_info").empty()
-        for (les of results) {
-          console.log(les)
-          $("#student_rooster_info").append('<li>' + les[3] + '<li>' + les[4] + '<li>' + les[5] + '<li>' + les[6] + '<li> <a href="qrcode/' + les[1] + '">maak qr code</a>')
-
-        }
-      }
-
-    })
-
-  }
-
-  get_docent_rooster()
-  setInterval(get_docent_rooster, 1000)
+  
 </script>
 

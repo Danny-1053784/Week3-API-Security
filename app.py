@@ -41,9 +41,9 @@ def login():
         print(dbu.user_login(gebruikersnaam, wachtwoord))
         if dbu.user_login(gebruikersnaam, wachtwoord):
             session['username'] = gebruikersnaam
-           
+            voornaam=session['docent_naam']
             return render_template(
-            "admin.html")
+            "admin.html", voornaam=voornaam)
         else:
             return redirect(url_for('index'))
 
@@ -63,6 +63,10 @@ def aanwezigheid_post(lesid):
     studentnummer = output["studentnummer"]
     print(output)
     return output
+
+@app.route('/les-aanmaken')
+def lesAanmaken():
+    return render_template('les-aanmaken.html')
 
 # de pagina waar de qr code op komt te staan (Wouter)
 @app.route("/qrcode/<lesid>", methods=["GET", "POST"])

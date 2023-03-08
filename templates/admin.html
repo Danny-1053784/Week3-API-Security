@@ -123,6 +123,12 @@
                 QR link
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/leerlingen lijst">
+                <span data-feather="aanwezigheid" class="align-text-bottom"></span>
+                  lijst van leerlingen
+              </a>
+            </li>
 
           </ul>
 
@@ -200,7 +206,7 @@
         $("#student_rooster_info").empty()
         for (les of results) {
           console.log(les)
-          $("#student_rooster_info").append('<li>' + les[3] + '<li>' + les[4] + '<li>' + les[5] + '<li>' + les[6] + '<li> <a href="qrcode/' + les[1] + '">maak qr code</a>')
+          $("#student_rooster_info").append('<li>' + les[3] + '<li>' + les[4] + '<li>' + les[5] + '<li>' + les[6] + '<li> <a href="qrcode/' + les[0] + '">maak qr code</a>')
 
         }
       }

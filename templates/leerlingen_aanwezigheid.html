@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leerlingen aanwezigheid</title>
+</head>
+<body>
+
+<!-- loop over all students -->
+{% for student in students %}
+    <hr>
+    <h1>{{ student.name }}</h1>
+    <h2>{{ student.class }}</h2>
+    <h3>{{ student.date }}</h3>
+    <h4>{{ student.time }}</h4>
+    <h5>{{ student.present }}</h5>
+    <hr>
+{% endfor %}
+
+</body>
+</html>

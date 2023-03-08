@@ -68,6 +68,11 @@ def qrcode(lesid = None):
     # Ga naar qrcode.html en geef lesid mee
     return render_template("qrcode.html", lesid=lesid)
 
+@app.route("/leerlingen_aanwezigheid")
+def leerlingen_aanwezigheid():
+    # haal de leerlingen op uit de database
+    students = dbm.get_students()
+    return render_template("leerlingen_aanwezigheid.html", students=students)
 
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)

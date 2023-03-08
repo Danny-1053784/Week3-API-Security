@@ -40,3 +40,10 @@ class DatabaseModel:
         cursor = sqlite3.connect(self.database_file).cursor()
         cursor.execute(f"UPDATE les SET actief = {actief} WHERE les_id = {les_id}")
         cursor.connection.commit()
+
+    # Dit is een functie die alle studenten ophaalt uit de database (Wouter)
+    def get_students(self):
+        cursor = sqlite3.connect(self.database_file).cursor()
+        cursor.execute(f"SELECT * FROM student")
+        students = cursor.fetchall()
+        return students

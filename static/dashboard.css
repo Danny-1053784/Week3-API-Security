@@ -134,4 +134,13 @@ body {
 .col-lg-6{
 
   width: 100% !important;
+  margin-left: 50%;
+  text-align: center;
+}
+h1.display-5.fw-bold {
+  text-align: justify;
+  margin-left: 50%;
+}
+table#student_rooster_info ul {
+  padding-bottom: 20px;
 }

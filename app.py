@@ -57,6 +57,10 @@ def meeting_docent():
 def aanwezigheid():
     return render_template('aanwezigheid.html')
 
+@app.route('/les-aanmaken')
+def lesAanmaken():
+    return render_template('les-aanmaken.html')
+
 # de pagina waar de qr code op komt te staan (Wouter)
 @app.route("/qrcode/<lesid>", methods=["GET", "POST"])
 def qrcode(lesid = None):

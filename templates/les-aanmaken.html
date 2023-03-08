@@ -1,8 +1,3 @@
-
-<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"> Logout </a>
-<br>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,15 +80,6 @@
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
     }
-    .navbar-inverse{
-      background-color: #d30f4c !important;
-    }
-    .navbar-inverse .navbar-nav>li>a{
-      color: white;
-    }
-    .navbar-inverse .navbar-brand {
-    color: white !important;
-}
   </style>
 
 </head>
@@ -133,13 +119,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/les-aanmaken">
-                <span data-feather="aanwezigheid" class="align-text-bottom"></span>
-                Les aanmaken
-              </a>
-            </li>
+                <a class="nav-link" href="/les-aanmaken">
+                  <span data-feather="aanwezigheid" class="align-text-bottom"></span>
+                  Les aanmaken
+                </a>
+              </li>
           </ul>
-          
+
 
         </div>
       </nav>
@@ -154,55 +140,34 @@
     integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous">
   </script>
   
-  {% include 'header.html' %}
 
-  <main>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+          aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="">Welkom {{ gebruikersnaam }}</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav navbar-right">
 
-    <div class="px-4 py-5 my-5 text-center">
-
-      <h1 class="display-5 fw-bold">Rooster docent</h1>
-      <div class="col-lg-6 mx-auto">
-
-        <ul id="student_rooster_info">
-
-          <li> </li>
-          <li> </li>
-
+          <li><a href="">Uitloggen</a></li>
+          <li><a href="">Home</a></li>
         </ul>
-
       </div>
     </div>
-
-  </main>
+  </nav>
 
 </body>
 
 </html>
 
 <script type="application/javascript">
-  function get_docent_rooster() {
-    $.ajax({
-      url: "/meeting",
-      type: "GET",
-      dataType: "json",
-      error: function (data) {
-        console.log("error" + data)
-      },
-      success: function (results) {
-
-        $("#student_rooster_info").empty()
-        for (les of results) {
-          console.log(les)
-          $("#student_rooster_info").append('<li>' + les[3] + '<li>' + les[4] + '<li>' + les[5] + '<li>' + les[6] + '<li> <a href="qrcode/' + les[1] + '">maak qr code</a>')
-
-        }
-      }
-
-    })
-
-  }
-
-  get_docent_rooster()
-  setInterval(get_docent_rooster, 1000)
+  
 </script>
 

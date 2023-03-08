@@ -121,12 +121,10 @@
       <h1 class="display-5 fw-bold">Rooster docent</h1>
       <div class="col-lg-6 mx-auto">
 
-        <ul id="student_rooster_info">
+        <table id="student_rooster_info">
 
-          <li> </li>
-          <li> </li>
 
-        </ul>
+        </table>
 
       </div>
     </div>
@@ -151,7 +149,7 @@
         $("#student_rooster_info").empty()
         for (les of results) {
           console.log(les)
-          $("#student_rooster_info").append('<li>' + les[3] + '<li>' + les[4] + '<li>' + les[5] + '<li>' + les[6] + '<li> <a href="qrcode/' + les[1] + '">maak qr code</a>')
+          $("#student_rooster_info").append( '<ul>' + '<li>' + les[3] + '<li>' + les[4] + '<li>' + les[5] + '<li>' + les[6] + '<li> <a href="qrcode/' + les[0] + '">maak qr code</a> </li>'  )
 
         }
       }
@@ -160,6 +158,7 @@
 
   }
 
+  
   get_docent_rooster()
   setInterval(get_docent_rooster, 1000)
 </script>

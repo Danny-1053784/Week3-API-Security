@@ -9,11 +9,10 @@
 <!-- loop over all students -->
 {% for student in students %}
     <hr>
-    <h1>{{ student.name }}</h1>
-    <h2>{{ student.class }}</h2>
-    <h3>{{ student.date }}</h3>
-    <h4>{{ student.time }}</h4>
-    <h5>{{ student.present }}</h5>
+    <h1>{{ student[0] }}</h1>
+    <h2>{{ student[1] }}</h2>
+    <h3>{{ student[2] }}</h3>
+    <h4>{{ student[3] }}</h4>
     <hr>
 {% endfor %}
 

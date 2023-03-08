@@ -41,9 +41,9 @@ def login():
         print(dbu.user_login(gebruikersnaam, wachtwoord))
         if dbu.user_login(gebruikersnaam, wachtwoord):
             session['username'] = gebruikersnaam
-           
+            voornaam=session['docent_naam']
             return render_template(
-            "admin.html")
+            "admin.html", voornaam=voornaam)
         else:
             return redirect(url_for('index'))
 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Deze librarys gaan we gebruiken voor het maken van de QR code -->
+    <!-- website: https://code-boxx.com/generate-qr-code-javascript/ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.js" integrity="sha512-is1ls2rgwpFZyixqKFEExPHVUUL+pPkBEPw47s/6NDQ4n1m6T/ySeDW3p54jp45z2EJ0RSOgilqee1WhtelXfA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+
+<p> Dit is de pagina waarop de qr code komt te staan</p>
+<div id="qrcode"></div>
+<p>{{ lesid }}</p>
+<a href="/">terug</a>
+
+<script>
+    var qrcode = new QRCode("qrcode", {
+        text: "{{ lesid }}",
+        width: 128,
+        height: 128,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+</script>
+
+</body>
+</html>

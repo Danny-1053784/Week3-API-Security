@@ -53,6 +53,18 @@ def meeting_docent():
     meeting_docent = dbm.get_les_docent(docent_id)
     return jsonify(meeting_docent)
 
+# de pagina waar de qr code op komt te staan (Wouter)
+@app.route("/qrcode/<lesid>", methods=["GET", "POST"])
+def qrcode(lesid = None):
+    # De lesid is standaard null, maar als er een lesid wordt meegegeven, dan wordt die gebruikt
+    print(lesid)
+    # zet de les op actief
+    dbm.update_les_actief(lesid, 1)
+    print("De les " + lesid + " is actief gezet")
+    # Ga naar qrcode.html en geef lesid mee
+    return render_template("qrcode.html", lesid=lesid)
+
+
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <link rel="stylesheet" href="/static/aanwezigheid.css">
+   
+</head>
+<body>
+
+<div id="LeerlingnummerStudent"></div>
+<div id ="aanwezig"></div>
+<script>   
+    var studentnummer = prompt('Wat is uw studentnummer? ' + ' ')
+    var tekst = 'Uw studentnummer is: ' + studentnummer;
+    var aanwezigheid = 'Je bent aanwezig!'
+    
+    document.getElementById('LeerlingnummerStudent').innerHTML = tekst
+    document.getElementById('aanwezig').innerHTML = aanwezigheid
+    console.log(studentnummer)
+</script>
+
+</body>
+</html>

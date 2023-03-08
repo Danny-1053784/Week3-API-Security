@@ -68,11 +68,18 @@ def qrcode(lesid = None):
     # Ga naar qrcode.html en geef lesid mee
     return render_template("qrcode.html", lesid=lesid)
 
+# De pagina waar de lijst van leerlingen staat (Wouter)
 @app.route("/leerlingen_lijst")
 def leerlingen_aanwezigheid():
     # haal de leerlingen op uit de database
     students = dbm.get_students()
     return render_template("leerlingen_aanwezigheid.html", students=students)
+
+# De pagina waar de details van de leerlingen staan (Wouter)
+@app.route("/leerling_details/<studentid>", methods=["GET", "POST"])
+def leerling_details(studentid = None):
+    # ga naar leerling_details.html en geef studentid mee
+    return render_template("leerling_details.html", studentid=studentid)
 
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)

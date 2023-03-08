@@ -12,8 +12,8 @@
 
 <p> Dit is de pagina waarop de qr code komt te staan</p>
 <div id="qrcode"></div>
-<p>{{ lesid }}</p>
-<a href="/">terug</a>
+<a href="/aanwezigheid/{{lesid}}">{{ lesid }}</a><br>
+<a href="/admin">terug</a>
 
 <script>
     var qrcode = new QRCode("qrcode", {

@@ -6,10 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Javascript</title>
     <link rel="stylesheet" href="/static/aanwezigheid.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
    
 </head>
 <body>
-
+<!--  
 <div id="LeerlingnummerStudent"></div>
 <div id ="aanwezig"></div>
 <script>   
@@ -19,7 +20,33 @@
     
     document.getElementById('LeerlingnummerStudent').innerHTML = tekst
     document.getElementById('aanwezig').innerHTML = aanwezigheid
-    console.log(studentnummer)
+</script>
+-->
+
+<label for="studentnummer">Studentnummer:</label> <input type="text" id="studentnummer" name="studentnummer"><br>
+<label for="name">Name:</label><input type="text" id="name" name="name"><br>
+<label for="vraag">Stel een vraag:<input type="textarea"></label><br>
+<button type="submit" onclick="post_aanwezigheid()">Submit</button>
+
+<script type="application/javascript">
+    function post_aanwezigheid() {
+        $.ajax({
+            url: "/aanwezigheidpost/{{lesid}}",
+            type: "POST",
+            contentType: "json",
+            data: JSON.stringify({
+               studentnummer
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+            },
+            failure: function (errMsg) {
+                console.log(errMsg)
+            }
+        })
+    }
 </script>
 
 </body>

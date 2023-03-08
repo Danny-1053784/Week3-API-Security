@@ -53,9 +53,16 @@ def meeting_docent():
     meeting_docent = dbm.get_les_docent(docent_id)
     return jsonify(meeting_docent)
 
-@app.route('/aanwezigheid')
-def aanwezigheid():
-    return render_template('aanwezigheid.html')
+@app.route('/aanwezigheid/<lesid>')
+def aanwezigheid(lesid):
+    return render_template('aanwezigheid.html', lesid=lesid)
+
+@app.route("/aanwezigheidpost/<lesid>", methods=["POST"])
+def aanwezigheid_post(lesid):
+    output = request.get_json()
+    studentnummer = output["studentnummer"]
+    print(output)
+    return output
 
 # de pagina waar de qr code op komt te staan (Wouter)
 @app.route("/qrcode/<lesid>", methods=["GET", "POST"])

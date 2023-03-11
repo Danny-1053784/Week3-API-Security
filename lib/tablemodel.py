@@ -18,9 +18,13 @@ class DatabaseModel:
         return tables
 
     # Given a table name, return the rows and column names
-    def get_table_content(self, table_name):
+    # Je kan een column name en value meegeven om een specifieke rij op te halen
+    def get_table_content(self, table_name, column_name=None, column_value=None):
         cursor = sqlite3.connect(self.database_file).cursor()
-        cursor.execute(f"SELECT * FROM {table_name} ")
+        if column_name and column_value is None:
+            cursor.execute(f"SELECT * FROM {table_name} WHERE {column_name} = {column_value}")
+        else:
+            cursor.execute(f"SELECT * FROM {table_name} ")
         # An alternative for this 2 var approach is to set a sqlite row_factory on the connection
         table_headers = [column_name[0] for column_name in cursor.description]
         table_content = cursor.fetchall()
@@ -52,6 +56,18 @@ class DatabaseModel:
     def get_aanwezigheid_student(self, studentid):
         cursor = sqlite3.connect(self.database_file).cursor()
         # pak de aanwezigheid van de student en de les
-        cursor.execute(f"SELECT * FROM aanwezigheid, les WHERE student_fk is 1 and aanwezigheid.les_fk = les.les_id ORDER BY les.start_date DESC")
+        cursor.execute(f"SELECT * FROM aanwezigheid, les WHERE student_fk is {studentid} and aanwezigheid.les_fk = les.les_id ORDER BY les.start_date DESC")
+        # 0 = aanwezigheid_id
+        # 1 = inchecktijd
+        # 2 = les_fk
+        # 3 = student_fk
+        # 4 = les_id
+        # 5 = docent_id
+        # 6 = klas_id
+        # 7 = les_naam
+        # 8 = lokaal
+        # 9 = start_date
+        # 10 = end_date
+        # 11 = actief
         aanwezigheid = cursor.fetchall()
         return aanwezigheid

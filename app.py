@@ -81,7 +81,7 @@ def leerling_details(studentid = None):
     # haal alles op uit de aanwezigheid tabel met de studentid
     aanwezigheid = dbm.get_aanwezigheid_student(studentid)
     # ga naar leerling_details.html en geef studentid mee
-    return render_template("leerling_details.html", studentid=studentid)
+    return render_template("leerling_details.html", studentid=studentid, aanwezigheid=aanwezigheid)
 
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)

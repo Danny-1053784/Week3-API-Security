@@ -47,3 +47,11 @@ class DatabaseModel:
         cursor.execute(f"SELECT * FROM student")
         students = cursor.fetchall()
         return students
+
+    # Dit is een functie die alle studenten ophaalt op basis van de aanwezigheid tabel. Hij haalt dan meteen ook alle data op uit de les tabel(Wouter)
+    def get_aanwezigheid_student(self, studentid):
+        cursor = sqlite3.connect(self.database_file).cursor()
+        # pak de aanwezigheid van de student en de les
+        cursor.execute(f"SELECT * FROM aanwezigheid, les WHERE student_fk is 1 and aanwezigheid.les_fk = les.les_id ORDER BY les.start_date DESC")
+        aanwezigheid = cursor.fetchall()
+        return aanwezigheid

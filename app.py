@@ -78,6 +78,8 @@ def leerlingen_aanwezigheid():
 # De pagina waar de details van de leerlingen staan (Wouter)
 @app.route("/leerling_details/<studentid>", methods=["GET", "POST"])
 def leerling_details(studentid = None):
+    # haal alles op uit de aanwezigheid tabel met de studentid
+    aanwezigheid = dbm.get_aanwezigheid_student(studentid)
     # ga naar leerling_details.html en geef studentid mee
     return render_template("leerling_details.html", studentid=studentid)
 

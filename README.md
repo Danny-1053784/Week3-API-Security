@@ -25,7 +25,7 @@ er staan tot nu toe 3 studenten in de database:
 
 
 ## QR genereren
-alle actieve lessen waar een QR code voor is staat in de tabel `activeles`. Later gaan we dus op die id checken of iets actief is of niet.
+De QR code word gegenereerd door een library. In de div met de ID `qrcode` word een qr code gezet
 
 
 # Bronnen

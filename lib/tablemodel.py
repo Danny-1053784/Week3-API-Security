@@ -21,8 +21,11 @@ class DatabaseModel:
     # Je kan een column name en value meegeven om een specifieke rij op te halen
     def get_table_content(self, table_name, column_name=None, column_value=None):
         cursor = sqlite3.connect(self.database_file).cursor()
-        if column_name and column_value is None:
-            cursor.execute(f"SELECT * FROM {table_name} WHERE {column_name} = {column_value}")
+        print(table_name, column_name, column_value)
+        if column_name and column_value is not None:
+            print("De column name en value zijn niet none")
+            cursor.execute(f"SELECT * FROM {table_name} WHERE {column_name} LIKE '%{column_value}%'")
+            print("SELECT * FROM " + table_name + " WHERE " + column_name + " LIKE %" + column_value + "%")
         else:
             cursor.execute(f"SELECT * FROM {table_name} ")
         # An alternative for this 2 var approach is to set a sqlite row_factory on the connection
@@ -56,7 +59,7 @@ class DatabaseModel:
     def get_aanwezigheid_student(self, studentid):
         cursor = sqlite3.connect(self.database_file).cursor()
         # pak de aanwezigheid van de student en de les
-        cursor.execute(f"SELECT * FROM aanwezigheid, les WHERE student_fk is {studentid} and aanwezigheid.les_fk = les.les_id ORDER BY les.start_date DESC")
+        cursor.execute(f"SELECT * FROM aanwezigheid, les WHERE student_id is {studentid} and aanwezigheid.les_id = les.les_id ORDER BY les.start_date DESC")
         # 0 = aanwezigheid_id
         # 1 = inchecktijd
         # 2 = les_fk

@@ -5,6 +5,11 @@
     <title>Leerlingen aanwezigheid</title>
 </head>
 <body>
+<form action="/leerlingen_lijst" method="post">
+    <label for="naam">Naam:</label>
+    <input type="text" name="naam" placeholder="naam">
+    <input type="submit" value="zoeken!">
+</form>
 
 <!-- loop over all students -->
 {% for student in students %}

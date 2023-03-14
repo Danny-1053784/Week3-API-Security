@@ -90,7 +90,7 @@ def leerlingen_aanwezigheid(naam = None):
         students = dbm.get_students()
     else:
         print("naam is niet none")
-        students = dbm.get_table_content("student","voornaam", naam)
+        students = dbm.get_students(naam)
     return render_template("leerlingen_aanwezigheid.html", students=students)
 
 # De pagina waar de details van de leerlingen staan (Wouter)

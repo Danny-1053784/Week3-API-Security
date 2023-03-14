@@ -25,7 +25,6 @@ class DatabaseModel:
         if column_name and column_value is not None:
             print("De column name en value zijn niet none")
             cursor.execute(f"SELECT * FROM {table_name} WHERE {column_name} LIKE '%{column_value}%'")
-            print("SELECT * FROM " + table_name + " WHERE " + column_name + " LIKE %" + column_value + "%")
         else:
             cursor.execute(f"SELECT * FROM {table_name} ")
         # An alternative for this 2 var approach is to set a sqlite row_factory on the connection
@@ -49,9 +48,13 @@ class DatabaseModel:
         cursor.connection.commit()
 
     # Dit is een functie die alle studenten ophaalt uit de database (Wouter)
-    def get_students(self):
+    def get_students(self, zoekterm=None):
+        # Hier moet iets komen om specifieke studenten op te halen
         cursor = sqlite3.connect(self.database_file).cursor()
-        cursor.execute(f"SELECT * FROM student")
+        if zoekterm is None:
+            cursor.execute(f"SELECT * FROM student")
+        else:
+            cursor.execute(f"SELECT * FROM student WHERE student_id LIKE '%{zoekterm}%' OR voornaam LIKE '%{zoekterm}%' OR achternaam LIKE '%{zoekterm}%'")
         students = cursor.fetchall()
         return students
 

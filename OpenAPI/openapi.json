@@ -5,6 +5,12 @@
         "description": "The Art Of Coding API is een API die gebruikt word door docenten om de aanwezigheid van studenten te monitoren.",
         "version": "1.0.0"
     },
+    "servers": [
+        {
+            "url": "http://localhost:5000",
+            "description": "Ontwikkel server"
+        }
+    ],
     "paths": {
       "/users": {
         "get": {

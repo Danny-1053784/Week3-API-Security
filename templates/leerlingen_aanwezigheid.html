@@ -3,8 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Leerlingen aanwezigheid</title>
+    <link rel="stylesheet" href="/static/heroes.css" type="text/css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 </head>
+<style>
+    .h1, .h2, .h3, h1, h2, h3,h4 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 25%;
+}
+form {
+    margin-left: 18%;
+    margin-top: 1vh;
+}
+input[type="submit"] {
+    margin-left: 9%;
+}
+</style>
 <body>
+<div class="container-fluid">
+    {% include 'sidebar.html' %}
+</div>
 <form action="/leerlingen_lijst" method="post">
     <label for="naam">Naam:</label>
     <input type="text" name="naam" placeholder="naam">
@@ -23,6 +45,9 @@
     </form>
 {% endfor %}
 <hr>
+
+
+{% include 'header.html' %}
 
 </body>
 </html>

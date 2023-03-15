@@ -1,0 +1,20 @@
+{
+  "openapi": "3.0.0",
+    "info": {
+        "title": "The Art Of Coding",
+        "description": "The Art Of Coding API is een API die gebruikt word door docenten om de aanwezigheid van studenten te monitoren.",
+        "version": "1.0.0"
+    },
+    "paths": {
+      "/users": {
+        "get": {
+          "summary": "Get all users",
+          "responses": {
+            "200": {
+              "description": "OK"
+            }
+          }
+        }
+      }
+    }
+}

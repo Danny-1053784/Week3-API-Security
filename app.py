@@ -71,8 +71,12 @@ def lesAanmaken():
 
 @app.route('/admin')
 def admin():
-    voornaam=session['docent_naam']
-    return render_template('admin.html', voornaam=voornaam)
+    if 'username' in session:
+        voornaam=session['docent_naam']
+        return render_template('admin.html', voornaam=voornaam)
+    else:
+        return redirect(url_for('index'))
+
 
 # de pagina waar de qr code op komt te staan (Wouter)
 @app.route("/qrcode/<lesid>", methods=["GET", "POST"])

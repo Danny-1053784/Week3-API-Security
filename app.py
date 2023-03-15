@@ -68,6 +68,10 @@ def aanwezigheid_post(lesid):
 def lesAanmaken():
     return render_template('les-aanmaken.html')
 
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
+
 # de pagina waar de qr code op komt te staan (Wouter)
 @app.route("/qrcode/<lesid>", methods=["GET", "POST"])
 def qrcode(lesid = None):

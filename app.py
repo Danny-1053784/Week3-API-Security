@@ -80,10 +80,17 @@ def qrcode(lesid = None):
     return render_template("qrcode.html", lesid=lesid)
 
 # De pagina waar de lijst van leerlingen staat (Wouter)
-@app.route("/leerlingen_lijst")
-def leerlingen_aanwezigheid():
-    # haal de leerlingen op uit de database
-    students = dbm.get_students()
+@app.route("/leerlingen_lijst", methods=["GET", "POST"])
+def leerlingen_aanwezigheid(naam = None):
+    # haal de leerlingen op uit de database als naam niet is meegegeven
+    # zoek naar een specifieke leerling uit de database als naam wel is meegegeven
+    naam = request.form.get("naam")
+    if naam is None or naam == '':
+        print("naam is none")
+        students = dbm.get_students()
+    else:
+        print("naam is niet none")
+        students = dbm.get_students(naam)
     return render_template("leerlingen_aanwezigheid.html", students=students)
 
 # De pagina waar de details van de leerlingen staan (Wouter)
@@ -91,6 +98,7 @@ def leerlingen_aanwezigheid():
 def leerling_details(studentid = None):
     # haal alles op uit de aanwezigheid tabel met de studentid
     aanwezigheid = dbm.get_aanwezigheid_student(studentid)
+    print(studentid)
     # ga naar leerling_details.html en geef studentid mee
     return render_template("leerling_details.html", studentid=studentid, aanwezigheid=aanwezigheid)
 

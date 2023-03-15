@@ -102,6 +102,11 @@ def leerling_details(studentid = None):
     # ga naar leerling_details.html en geef studentid mee
     return render_template("leerling_details.html", studentid=studentid, aanwezigheid=aanwezigheid)
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
 

@@ -12,12 +12,48 @@
         }
     ],
     "paths": {
-      "/users": {
+      "/meeting": {
         "get": {
-          "summary": "Get all users",
+          "summary": "Get all lessons",
           "responses": {
             "200": {
-              "description": "OK"
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "les_id": {
+                          "type": "integer"
+                        },
+                        "docent_id": {
+                          "type": "integer"
+                        },
+                        "klas_id": {
+                          "type": "integer"
+                        },
+                        "les_naam": {
+                          "type": "string"
+                        },
+                        "lokaal": {
+                          "type": "string"
+                        },
+                        "strat_date": {
+                          "type": "date"
+                        },
+                        "end_date": {
+                          "type": "date"
+                        },
+                        "actief": {
+                          "type": "boolean"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
         }

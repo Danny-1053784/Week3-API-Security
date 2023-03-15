@@ -77,3 +77,6 @@ en nog wat extra info zoals in dit geval de `description`. De `content` is dan d
 Schema verteld ons wat de structuur is van de data die we terug krijgen. In dit geval is het een array.
 Items geeft dan aan wat de structuur is van de items in de array. In dit geval is het een User. Het kan ook
 een string zijn, een integer, een boolean, etc.
+
+#### $ref?
+Dit is een referentie naar een andere plek in het bestand. In dit geval naar de User structuur.

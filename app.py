@@ -66,11 +66,13 @@ def aanwezigheid_post(lesid):
 
 @app.route('/les-aanmaken')
 def lesAanmaken():
-    return render_template('les-aanmaken.html')
+    voornaam=session['docent_naam']
+    return render_template('les-aanmaken.html', voornaam=voornaam)
 
 @app.route('/admin')
 def admin():
-    return render_template('admin.html')
+    voornaam=session['docent_naam']
+    return render_template('admin.html', voornaam=voornaam)
 
 # de pagina waar de qr code op komt te staan (Wouter)
 @app.route("/qrcode/<lesid>", methods=["GET", "POST"])
@@ -89,13 +91,14 @@ def leerlingen_aanwezigheid(naam = None):
     # haal de leerlingen op uit de database als naam niet is meegegeven
     # zoek naar een specifieke leerling uit de database als naam wel is meegegeven
     naam = request.form.get("naam")
+    voornaam=session['docent_naam']  
     if naam is None or naam == '':
         print("naam is none")
         students = dbm.get_students()
     else:
         print("naam is niet none")
         students = dbm.get_students(naam)
-    return render_template("leerlingen_aanwezigheid.html", students=students)
+    return render_template("leerlingen_aanwezigheid.html", students=students, voornaam=voornaam)
 
 # De pagina waar de details van de leerlingen staan (Wouter)
 @app.route("/leerling_details/<studentid>", methods=["GET", "POST"])

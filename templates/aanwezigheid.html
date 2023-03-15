@@ -25,9 +25,31 @@
 
 <label for="studentnummer">Studentnummer:</label> <input type="text" id="studentnummer" name="studentnummer"><br>
 <label for="name">Name:</label><input type="text" id="name" name="name"><br>
-<label for="vraag">Stel een vraag:<input type="textarea"></label><br>
+<label for="vraag">Stel een vraag:<input type="textarea" id="vraag"></label><br>
 <button type="submit" onclick="post_aanwezigheid()">Submit</button>
 
+<script>
+    function post_aanwezigheid() {
+
+        const firstname = document.getElementById("name").value;
+        const studentnummer = document.getElementById("studentnummer").value;
+        const vraag = document.getElementById("vraag").value;
+        
+        const dict_values = {firstname, studentnummer, vraag} //Pass the javascript variables to a dictionary.
+        const s = JSON.stringify(dict_values); // Stringify converts a JavaScript object or value to a JSON string
+        console.log(s); // Prints the variables to console window, which are in the JSON format
+        window.alert(s)
+        $.ajax({
+            url:"/aanwezigheidpost/{{lesid}}",
+            type:"POST",
+            contentType: "application/json",
+            data: JSON.stringify(s)});
+
+}
+
+</script>
+
+<!--
 <script type="application/javascript">
     function post_aanwezigheid() {
         $.ajax({
@@ -48,6 +70,6 @@
         })
     }
 </script>
-
+-->
 </body>
 </html>

@@ -64,6 +64,13 @@ def aanwezigheid_post(lesid):
     print(output)
     return output
 
+@app.route('/set_student_aanwezig', methods=['GET', 'POST'])
+def set_student_aanwezig():
+    url = request.args.get(studentnummer=1025561) 
+    #response = pass
+    return url
+
+
 @app.route('/les-aanmaken')
 def lesAanmaken():
     voornaam=session['docent_naam']

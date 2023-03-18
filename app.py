@@ -58,9 +58,13 @@ def aanwezigheid(lesid):
     return render_template('aanwezigheid.html', lesid=lesid)
 
 @app.route("/aanwezigheidpost/<lesid>", methods=["POST"])
-def aanwezigheid_post(lesid):
+def aanwezigheid_post(lesid = None):
     output = request.get_json()
+    if output is None:
+        print("Output is none")
+    print("We zijn nu in de aanwezigheidpost functie")
     studentnummer = output["studentnummer"]
+    print("We gaan nu de output printen")
     print(output)
     return output
 

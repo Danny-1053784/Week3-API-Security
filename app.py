@@ -57,6 +57,7 @@ def meeting_docent():
 def aanwezigheid(lesid):
     return render_template('aanwezigheid.html', lesid=lesid)
 
+# Gemaakt door Bryan, ik (Wouter) heb een paar dingen aangepast
 @app.route("/aanwezigheidpost/<lesid>", methods=["POST"])
 def aanwezigheid_post(lesid = None):
     output = request.get_json()

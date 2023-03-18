@@ -28,6 +28,7 @@
 <label for="vraag">Stel een vraag:<input type="textarea" id="vraag"></label><br>
 <button type="submit" onclick="post_aanwezigheid()">Submit</button>
 
+<!-- Functie gemaakt door Bryan en aangepast door Wouter-->
 <script>
     function post_aanwezigheid() {
 
@@ -44,7 +45,9 @@
             url:"/aanwezigheidpost/{{lesid}}",
             type:"POST",
             contentType: "application/json",
-            data: s,
+            data: s, // <-- Hier zat een fout
+            // Hier stond "data: JSON.stringify(s)"
+            // En omdat je al in regel 40 stringify hebt gebruikt, is het niet nodig om het nog een keer te doen.
             dataType: "json",
             success: function (data) {
                 console.log(data)

@@ -15,6 +15,10 @@
 <a href="/aanwezigheid/{{lesid}}">{{ lesid }}</a><br>
 <a href="/admin">terug</a>
 
+<div id="Resultaten">
+
+</div>
+
 <script>
     var qrcode = new QRCode("qrcode", {
         text: "{{ lesid }}",
@@ -24,6 +28,27 @@
         colorLight : "#ffffff",
         correctLevel : QRCode.CorrectLevel.H
     });
+</script>
+<!-- Hier gaan we de studenten ophalen die aanwezig zijn -->
+<script type="application/javascript">
+    function get_aanwezige_studenten(){
+        $.ajax({
+            url: '/aanwezigheid/{{lesid}}',
+            type: 'GET',
+            dataType: 'json',
+            error: function (data) {
+                console.log("error" + data)
+            },
+            success: function (results) {
+                console.log(results)
+
+                $('#Resultaten').empty()
+                for (leerling of results) {
+                    $('#Resultaten').append('<p>' + leerling + '</p>')
+                }
+            }
+        })
+    }
 </script>
 
 </body>

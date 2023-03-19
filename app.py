@@ -67,6 +67,7 @@ def aanwezigheid_post(lesid = None):
     studentnummer = output["studentnummer"]
     print("We gaan nu de output printen")
     print(output)
+    dbm.insert_aanwezigheid(studentnummer, lesid)
     return output
 
 @app.route('/les-aanmaken')

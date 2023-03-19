@@ -35,9 +35,10 @@
         const firstname = document.getElementById("name").value;
         const studentnummer = document.getElementById("studentnummer").value;
         const vraag = document.getElementById("vraag").value;
-        console.log(firstname, studentnummer, vraag)
+        const lesid = {{lesid}};
+        console.log(firstname, studentnummer, vraag, lesid)
 
-        const dict_values = {firstname, studentnummer, vraag} //Pass the javascript variables to a dictionary.
+        const dict_values = {firstname, studentnummer, vraag, lesid} //Pass the javascript variables to a dictionary.
         const s = JSON.stringify(dict_values); // Stringify converts a JavaScript object or value to a JSON string
         console.log(s); // Prints the variables to console window, which are in the JSON format
         //window.alert(s)

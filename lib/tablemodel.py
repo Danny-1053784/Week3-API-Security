@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import uuid
 
 class DatabaseModel:
     """This class is a wrapper around the sqlite3 database. It provides a simple interface that maps methods
@@ -57,6 +58,18 @@ class DatabaseModel:
             cursor.execute(f"SELECT * FROM student WHERE student_id LIKE '%{zoekterm}%' OR voornaam LIKE '%{zoekterm}%' OR achternaam LIKE '%{zoekterm}%'")
         students = cursor.fetchall()
         return students
+
+    # Dit is een functie die de aanwezigheid tabel invult (Wouter)
+    def insert_aanwezigheid(self, student_id, les_id):
+        if student_id is None or les_id is None:
+            print("Er is geen student_id of les_id meegegeven")
+        else:
+            cursor = sqlite3.connect(self.database_file).cursor()
+            id = uuid.uuid4()
+            print(id)
+            cursor.execute(f"INSERT INTO aanwezigheid (aanwezigheid_id, inchecktijd, les_id, student_id) VALUES ('{id}', datetime('now'), {les_id}, {student_id})")
+            print("De aanwezigheid is toegevoegd")
+            print(student_id, les_id)
 
     # Dit is een functie die alle studenten ophaalt op basis van de aanwezigheid tabel. Hij haalt dan meteen ook alle data op uit de les tabel(Wouter)
     def get_aanwezigheid_student(self, studentid):

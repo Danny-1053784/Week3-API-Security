@@ -7,12 +7,18 @@
     <!-- website: https://code-boxx.com/generate-qr-code-javascript/ -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.js" integrity="sha512-is1ls2rgwpFZyixqKFEExPHVUUL+pPkBEPw47s/6NDQ4n1m6T/ySeDW3p54jp45z2EJ0RSOgilqee1WhtelXfA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.9.1.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
 
 <p> Dit is de pagina waarop de qr code komt te staan</p>
 <div id="qrcode"></div>
 <a href="/aanwezigheid/{{lesid}}">{{ lesid }}</a><br>
+<form action="/aanwezigheid/{{lesid}}" method="post">
+    <textarea name="vraag" id="vraag"></textarea>
+    <input type="submit" value="aanwezigheid ophalen">
 <a href="/admin">terug</a>
 
 <div id="Resultaten">
@@ -20,6 +26,13 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        // If form is submitted
+        $('form').submit(function (event) {
+
+        });
+    })
+
     var qrcode = new QRCode("qrcode", {
         text: "{{ lesid }}",
         width: 128,

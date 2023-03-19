@@ -17,8 +17,8 @@
 <div id="qrcode"></div>
 <a href="/aanwezigheid/{{lesid}}">{{ lesid }}</a><br>
 <form action="/aanwezigheid/{{lesid}}" method="post">
-    <textarea name="vraag" id="vraag"></textarea>
-    <input type="submit" value="aanwezigheid ophalen">
+    <textarea name="vraag" id="vraag" class="vraag"></textarea>
+</form>
 <a href="/admin">terug</a>
 
 <div id="Resultaten">
@@ -26,13 +26,6 @@
 </div>
 
 <script>
-    $(document).ready(function () {
-        // If form is submitted
-        $('form').submit(function (event) {
-
-        });
-    })
-
     var qrcode = new QRCode("qrcode", {
         text: "{{ lesid }}",
         width: 128,
@@ -44,24 +37,48 @@
 </script>
 <!-- Hier gaan we de studenten ophalen die aanwezig zijn -->
 <script type="application/javascript">
-    function get_aanwezige_studenten(){
-        $.ajax({
-            url: '/aanwezigheid/{{lesid}}',
-            type: 'GET',
-            dataType: 'json',
-            error: function (data) {
-                console.log("error" + data)
-            },
-            success: function (results) {
-                console.log(results)
+    $(document).ready(function () {
+        function get_aanwezige_studenten() {
+            $.ajax({
+                url: '/aanwezigheid/{{lesid}}',
+                type: 'GET',
+                dataType: 'json',
+                error: function (data) {
+                    console.log("error" + data)
+                },
+                success: function (results) {
+                    console.log(results)
 
-                $('#Resultaten').empty()
-                for (leerling of results) {
-                    $('#Resultaten').append('<p>' + leerling + '</p>')
+                    $('#Resultaten').empty()
+                    for (leerling of results) {
+                        $('#Resultaten').append('<p>' + leerling + '</p>')
+                    }
                 }
-            }
+            })
+        }
+
+        // Dit is de functie die de vraag ophaalt als er iets word ingevuld in de textarea en stuurt het door naar de backend (Wouter)
+        $('#vraag').on('input', function () {
+            // get the question of the lesson
+            console.log("vraag")
+            vraag = $('#vraag').val()
+            console.log(vraag)
+            $.ajax({
+                url: '/vraagles/{{lesid}}',
+                type: 'POST',
+                dataType: 'json',
+                data: {
+                    'vraag': vraag
+                },
+                error: function (data) {
+                    console.log("error" + data)
+                },
+                success: function (results) {
+                    console.log(results)
+                }
+            })
         })
-    }
+    })
 </script>
 
 </body>

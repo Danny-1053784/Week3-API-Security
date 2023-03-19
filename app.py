@@ -108,6 +108,13 @@ def leerling_details(studentid = None):
     # ga naar leerling_details.html en geef studentid mee
     return render_template("leerling_details.html", studentid=studentid, aanwezigheid=aanwezigheid)
 
+# Dit is een functie die de vraag tabel gaat invullen (Wouter)
+@app.route("/vraagles/<lesid>", methods=["POST"])
+def vraagles(lesid = None):
+    vraag = request.form.get("vraag")
+    print(vraag)
+    dbm.insert_vraag(lesid, vraag)
+
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)
 

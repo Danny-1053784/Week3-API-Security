@@ -90,3 +90,10 @@ class DatabaseModel:
         # 11 = actief
         aanwezigheid = cursor.fetchall()
         return aanwezigheid
+
+    # Dit is een functie die een object toevoegt aan de vraag tabel (Wouter)
+    def insert_vraag(self, lesid, vraag):
+        print("We zijn nu in de insert_vraag functie en de vraag " + vraag + " wordt toegevoegd aan de database")
+        cursor = sqlite3.connect(self.database_file).cursor()
+        vraag_id = uuid.uuid4()
+        pass

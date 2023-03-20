@@ -113,7 +113,10 @@ def leerling_details(studentid = None):
 def vraagles(lesid = None):
     vraag = request.form.get("vraag")
     print(vraag)
+    print(lesid)
     dbm.insert_vraag(lesid, vraag)
+    return "De vraag " + vraag + " is toegevoegd aan les " + lesid
+
 
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)

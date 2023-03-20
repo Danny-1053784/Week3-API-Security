@@ -93,7 +93,8 @@ class DatabaseModel:
 
     # Dit is een functie die een object toevoegt aan de vraag tabel (Wouter)
     def insert_vraag(self, lesid, vraag):
-        print("We zijn nu in de insert_vraag functie en de vraag " + vraag + " wordt toegevoegd aan de database")
+        print("We zijn nu in de insert_vraag functie en de vraag " + vraag + " wordt toegevoegd aan de database met het lesid " + lesid)
         cursor = sqlite3.connect(self.database_file).cursor()
         vraag_id = uuid.uuid4()
-        pass
+        cursor.execute(f"INSERT INTO Vraag (vraag_id, les_id, vraag) VALUES ('{vraag_id}', {lesid}, '{vraag}')")
+        cursor.connection.commit()

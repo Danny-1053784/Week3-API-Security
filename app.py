@@ -70,11 +70,13 @@ def aanwezigheid_post(lesid = None):
     output = request.get_json()
     if output is None:
         print("Output is none")
+        pass
     print("We zijn nu in de aanwezigheidpost functie")
     studentnummer = output["studentnummer"]
+    antwoord_vraag = output["vraag"]
     print("We gaan nu de output printen")
     print(output)
-    dbm.insert_aanwezigheid(studentnummer, lesid)
+    dbm.insert_aanwezigheid(studentnummer, lesid, antwoord_vraag)
     return output
 
 @app.route('/les-aanmaken')

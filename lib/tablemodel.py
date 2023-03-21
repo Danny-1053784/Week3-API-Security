@@ -60,16 +60,17 @@ class DatabaseModel:
         return students
 
     # Dit is een functie die de aanwezigheid tabel invult (Wouter)
-    def insert_aanwezigheid(self, student_id, les_id):
+    def insert_aanwezigheid(self, student_id, les_id, antwoord_vraag):
         if student_id is None or les_id is None:
             print("Er is geen student_id of les_id meegegeven")
         else:
             cursor = sqlite3.connect(self.database_file).cursor()
             id = uuid.uuid4()
             print(id)
-            cursor.execute(f"INSERT INTO aanwezigheid (aanwezigheid_id, inchecktijd, les_id, student_id) VALUES ('{id}', datetime('now'), {les_id}, {student_id})")
+            cursor.execute(f"INSERT INTO aanwezigheid (aanwezigheid_id, inchecktijd, les_id, student_id, antwoord_vraag) VALUES ('{id}', datetime('now'), {les_id}, {student_id}, '{antwoord_vraag}')")
+            cursor.connection.commit()
             print("De aanwezigheid is toegevoegd")
-            print(student_id, les_id)
+            print(student_id, les_id, antwoord_vraag)
 
     # Dit is een functie die alle studenten ophaalt op basis van de aanwezigheid tabel. Hij haalt dan meteen ook alle data op uit de les tabel(Wouter)
     def get_aanwezigheid_student(self, studentid):

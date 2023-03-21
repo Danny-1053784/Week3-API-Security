@@ -95,7 +95,14 @@
       </div>
       <div class="form-floating">
        <label>Klas:</label>
-       <input type="text" name="lokaal" id="lokaal">
+       <select name="klas_id_select" id="klas_id_select" class="update">
+    
+        {% for naam_les in klas %}
+      
+            <option value= "{{ naam_les }}" id="klas_id" name="klas_id">{{ naam_les }}</option>
+            
+        {% endfor %}
+        </select>
       </div>
       <div class="form-floating">
        <label>Lokaal:</label>

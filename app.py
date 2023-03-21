@@ -83,7 +83,7 @@ def les_aanmaken_docent():
     # print(test_id) 
     print(start_date)
     print(end_date)
-    
+    dbm.insert_les_docent(docent_id,klas_id,les_naam,lokaal,start_date,end_date)
 
     return ("les aangemaakt")
 

@@ -85,3 +85,11 @@ class DatabaseModel:
         cursor = sqlite3.connect(self.database_file).cursor()
         cursor.execute('INSERT INTO les(docent_id,klas_id,les_naam,lokaal,start_date,end_date) VALUES(?,?,?,?,?,?)', [docent_id,klas_id,value1,value2,start_date,end_date,] )
         cursor.connection.commit()
+
+    def read_klas_name_update(self):
+        cursor = sqlite3.connect(self.database_file).cursor()
+        cursor.execute("SELECT naam_klas,klas_id from klas group by naam_klas")
+           
+        table_content =[ table_content[0] for table_content in cursor.fetchall()]
+        # Note that this method returns 2 variables!
+        return table_content

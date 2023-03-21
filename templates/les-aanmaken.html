@@ -1,31 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Docent Dashboard</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/static/dashboard.css" type="text/css">
-  <link rel="stylesheet" href="/static/heroes.css" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Les aanmaken</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/static/heroes.css" type="text/css">
+      <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
+      <link rel="stylesheet" href="/static/login.css" type="text/css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      
+  </head>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
 
@@ -95,10 +84,39 @@
 
   </header>
 
-  <div class="container-fluid">
+  <body>
     {% include 'sidebar.html' %}
+  <div class="container-fluid">
+   
+        <h1>Les aanmaken</h1>
+      <div class="form-floating">
+       <label>Naam van de les:</label>
+       <input type="text" name="les_naam" id="les_naam">
+      </div>
+      <div class="form-floating">
+       <label>Klas:</label>
+       <input type="text" name="lokaal" id="lokaal">
+      </div>
+      <div class="form-floating">
+       <label>Lokaal:</label>
+       <input type="text" name="lokaal" id="lokaal">
+      </div>
+      <div class="form-floating">
+        <label>Begin datum en tijd:</label>
+       <input type="datetime-local" id="start_date" name="start_date">
+      </div>
+      <div class="form-floating">
+       <label>Eind datum en tijd:</label>
+       <input type="datetime-local" id="end_date" name="end_date">
+      </div>
+       <input type="submit" name="next" value="Les toevoegen" onclick="submitLesInfo();">
+   
+       
+      
+       
+      </div>
   </div>
-
+  
   <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
     integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
   </script>

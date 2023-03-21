@@ -1,31 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Docent Dashboard</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/static/dashboard.css" type="text/css">
-  <link rel="stylesheet" href="/static/heroes.css" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <title>Les aanmaken</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="/static/heroes.css" type="text/css">
+      <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
+      <link rel="stylesheet" href="/static/login.css" type="text/css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      
+  </head>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
 
@@ -95,17 +84,91 @@
 
   </header>
 
-  <div class="container-fluid">
+  <body>
     {% include 'sidebar.html' %}
+  <div class="container-fluid">
+   
+        <h1>Les aanmaken</h1>
+      <div class="form-floating">
+       <label>Naam van de les:</label>
+       <input type="text" name="les_naam" id="les_naam">
+      </div>
+      <div class="form-floating">
+       <label>Klas:</label>
+       <select name="klas_id_select" id="klas_id_select" class="update">
+    
+        {% for naam_les in klas %}
+      
+            <option value= "{{ naam_les }}" id="klas_id" name="klas_id">{{ naam_les }}</option>
+            
+        {% endfor %}
+        </select>
+      </div>
+      <div class="form-floating">
+       <label>Lokaal:</label>
+       <input type="text" name="lokaal" id="lokaal">
+      </div>
+      <div class="form-floating">
+        <label>Begin datum en tijd:</label>
+       <input type="datetime-local" id="start_date" name="start_date">
+      </div>
+      <div class="form-floating">
+       <label>Eind datum en tijd:</label>
+       <input type="datetime-local" id="end_date" name="end_date">
+      </div>
+       <input type="submit" name="next" value="Les toevoegen" onclick="submitLesInfo();">
+   
+       
+      
+       
+      </div>
   </div>
+  <script type="application/javascript">
 
-  <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
-    integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
-    integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous">
-  </script>
+function submitLesInfo() {
+  var klas_id = $('#klas_id_select').find(":selected").val();
+  // var klas_id = document.getElementById("klas_id");
+  // var klas_value = klas_id.value;
+  // console.log(klas_value)
+  console.log(klas_id)
+
+  var les_naam = document.getElementById("les_naam").value;
+  var lokaal = document.getElementById("lokaal").value;
   
+ 
+  var start_date = document.getElementById("start_date").value;
+  var start_date = start_date.replace("T", " ");
+  var end_date = document.getElementById("end_date").value;
+  var end_date = end_date.replace("T", " ");
+
+  var server_data = [
+    
+    klas_id,
+    les_naam,
+    lokaal,
+    start_date,
+    end_date
+    
+  ] ;
+   
+  console.log(server_data)
+
+  $.ajax({
+  type: "POST",
+  url: "/les_aanmaken_post",
+  data: JSON.stringify(server_data),
+  contentType: "application/json",
+  dataType: 'json',
+  success: function(result) {
+    
+    
+    console.log("alle data" , server_data);
+  
+  } 
+});
+  }
+
+  </script>
 
   {% include 'header.html' %}
 

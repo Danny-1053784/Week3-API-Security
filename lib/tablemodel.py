@@ -36,7 +36,7 @@ class DatabaseModel:
 
     def get_les_docent(self, docent_id):
         cursor = sqlite3.connect(self.database_file).cursor()
-        cursor.execute(f"SELECT * FROM les WHERE docent_id = {docent_id}")
+        cursor.execute(f"SELECT * FROM `les` as pt LEFT JOIN `klas` as pb ON pt.klas_id = pb.klas_id WHERE docent_id = {docent_id}")
         docent = cursor.fetchall()
         return docent
 
@@ -77,3 +77,28 @@ class DatabaseModel:
         # 11 = actief
         aanwezigheid = cursor.fetchall()
         return aanwezigheid
+    
+    def insert_les_docent(self,docent_id,klas_id,les_naam,lokaal,start_date,end_date):
+        value1= str(les_naam)
+        value2= str(lokaal)
+
+        cursor = sqlite3.connect(self.database_file).cursor()
+        cursor.execute('INSERT INTO les(docent_id,klas_id,les_naam,lokaal,start_date,end_date) VALUES(?,?,?,?,?,?)', [docent_id,klas_id,value1,value2,start_date,end_date,] )
+        cursor.connection.commit()
+
+    def read_klas_name_update(self):
+        cursor = sqlite3.connect(self.database_file).cursor()
+        cursor.execute("SELECT naam_klas,klas_id from klas group by naam_klas")
+           
+        table_content =[ table_content[0] for table_content in cursor.fetchall()]
+        # Note that this method returns 2 variables!
+        return table_content
+    
+    def read_klas_by_name(self, klas):
+         
+        cursor = sqlite3.connect(self.database_file).cursor()
+        cursor.execute("SELECT klas_id FROM klas WHERE naam_klas = '1A'")
+            
+        table_content = cursor.fetchone()[0]
+
+        return table_content  

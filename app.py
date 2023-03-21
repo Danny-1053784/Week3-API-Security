@@ -67,7 +67,29 @@ def aanwezigheid_post(lesid):
 @app.route('/les-aanmaken')
 def lesAanmaken():
     voornaam=session['docent_naam']
-    return render_template('les-aanmaken.html', voornaam=voornaam)
+    klas = dbm.read_klas_name_update()
+    return render_template('les-aanmaken.html', voornaam=voornaam,klas=klas)
+
+@app.route('/les_aanmaken_post', methods=['POST', 'GET'])
+def les_aanmaken_docent():
+  if request.method == "POST":
+    les_aanmaken_data = request.get_json()
+    docent_id = session['docent_id']
+    klas = les_aanmaken_data[0]
+    les_naam = les_aanmaken_data[1]
+    lokaal = les_aanmaken_data[2]
+    start_date = les_aanmaken_data[3]
+    end_date = les_aanmaken_data[4]
+    klas_value = dbm.read_klas_by_name(klas)
+
+    # print(test_id) 
+    print(start_date)
+    print(end_date)
+    print(klas_value)
+    dbm.insert_les_docent(docent_id,klas_value,les_naam,lokaal,start_date,end_date)
+
+
+    return ("les aangemaakt")
 
 @app.route('/admin')
 def admin():

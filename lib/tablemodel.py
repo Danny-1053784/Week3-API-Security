@@ -36,7 +36,7 @@ class DatabaseModel:
 
     def get_les_docent(self, docent_id):
         cursor = sqlite3.connect(self.database_file).cursor()
-        cursor.execute(f"SELECT * FROM les WHERE docent_id = {docent_id}")
+        cursor.execute(f"SELECT * FROM `les` as pt LEFT JOIN `klas` as pb ON pt.klas_id = pb.klas_id WHERE docent_id = {docent_id}")
         docent = cursor.fetchall()
         return docent
 

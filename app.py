@@ -64,6 +64,12 @@ def aanwezigheid(lesid):
     print(content)
     return render_template('aanwezigheid.html', lesid=lesid, content=content)
 
+# Deze route word aangeroepen door de Ajax om studenten te halen die zich in de les hebben ingeschreven.
+@app.route("/getleerlingen/<lesid>", methods=["GET"])
+def getleerlingen(lesid = None):
+    aanwezigeleerlingen = dbm.get_aanwezige_studenten(lesid)
+    return jsonify(aanwezigeleerlingen)
+
 # Gemaakt door Bryan, ik (Wouter) heb een paar dingen aangepast
 @app.route("/aanwezigheidpost/<lesid>", methods=["POST"])
 def aanwezigheid_post(lesid = None):

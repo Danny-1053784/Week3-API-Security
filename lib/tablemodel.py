@@ -101,3 +101,10 @@ class DatabaseModel:
         cursor.execute(f"DELETE FROM Vraag WHERE les_id = {lesid};")
         cursor.execute(f"INSERT INTO Vraag (vraag_id, les_id, vraag) VALUES ('{vraag_id}', {lesid}, '{vraag}')")
         cursor.connection.commit()
+
+    # Dit is een functie die alle studenten returnt (Wouter)
+    def get_aanwezige_studenten(self, lesid):
+        cursor = sqlite3.connect(self.database_file).cursor()
+        cursor.execute(f"SELECT aanwezigheid.inchecktijd, aanwezigheid.antwoord_vraag, student.voornaam, student.achternaam FROM aanwezigheid, student WHERE aanwezigheid.student_id = student.student_id and aanwezigheid.les_id = {1};")
+        aanwezigestudenten = cursor.fetchall()
+        return aanwezigestudenten

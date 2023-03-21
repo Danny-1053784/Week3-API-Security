@@ -69,6 +69,24 @@ def lesAanmaken():
     voornaam=session['docent_naam']
     return render_template('les-aanmaken.html', voornaam=voornaam)
 
+@app.route('/les_aanmaken_post', methods=['POST', 'GET'])
+def les_aanmaken_docent():
+  if request.method == "POST":
+    les_aanmaken_data = request.get_json()
+    docent_id = les_aanmaken_data[0]
+    klas_id = les_aanmaken_data[1]
+    les_naam = les_aanmaken_data[2]
+    lokaal = les_aanmaken_data[3]
+    start_date = les_aanmaken_data[4]
+    end_date = les_aanmaken_data[5]
+
+    # print(test_id) 
+    print(start_date)
+    print(end_date)
+    
+
+    return ("les aangemaakt")
+
 @app.route('/admin')
 def admin():
     if 'username' in session:

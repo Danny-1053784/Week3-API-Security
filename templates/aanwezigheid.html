@@ -24,8 +24,9 @@
 -->
 
 <label for="studentnummer">Studentnummer:</label> <input type="number" id="studentnummer" name="studentnummer"><br>
-<label for="name">Name:</label><input type="text" id="name" name="name"><br>
-<label for="vraag">Stel een vraag:<input type="textarea" id="vraag"></label><br>
+<label for="name">Naam:</label><input type="text" id="name" name="name"><br>
+<label for="vraag">{{ content[2] }}<input type="" id="vraag" style="width: 100px; height: 100px" ></label><br>
+<label for="textarea">{{ content[2] }}<textarea id="textarea" name="vraag"></textarea></label><br>
 <button type="submit" onclick="post_aanwezigheid()">Submit</button>
 
 <!-- Functie gemaakt door Bryan en aangepast door Wouter-->

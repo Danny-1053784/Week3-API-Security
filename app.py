@@ -53,9 +53,16 @@ def meeting_docent():
     meeting_docent = dbm.get_les_docent(docent_id)
     return jsonify(meeting_docent)
 
-@app.route('/aanwezigheid/<lesid>')
+@app.route('/aanwezigheid/<lesid>', methods=["GET", "POST"])
 def aanwezigheid(lesid):
-    return render_template('aanwezigheid.html', lesid=lesid)
+    content = dbm.get_table_content("Vraag", "les_id", lesid)
+    print(content)
+    content = content[0]
+    print(content)
+    # get the last element of the list
+    content = content[0]
+    print(content)
+    return render_template('aanwezigheid.html', lesid=lesid, content=content)
 
 # Gemaakt door Bryan, ik (Wouter) heb een paar dingen aangepast
 @app.route("/aanwezigheidpost/<lesid>", methods=["POST"])

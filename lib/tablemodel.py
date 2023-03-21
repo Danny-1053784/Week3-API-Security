@@ -97,7 +97,7 @@ class DatabaseModel:
     def read_klas_by_name(self, klas):
          
         cursor = sqlite3.connect(self.database_file).cursor()
-        cursor.execute("SELECT klas_id FROM klas WHERE naam_klas = '1A'")
+        cursor.execute(f"SELECT klas_id FROM klas WHERE naam_klas = '{klas}'")
             
         table_content = cursor.fetchone()[0]
 

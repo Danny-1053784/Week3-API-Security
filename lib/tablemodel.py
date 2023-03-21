@@ -95,8 +95,8 @@ class DatabaseModel:
     def insert_vraag(self, lesid, vraag):
         print("We zijn nu in de insert_vraag functie en de vraag " + vraag + " wordt toegevoegd aan de database met het lesid " + lesid)
         cursor = sqlite3.connect(self.database_file).cursor()
-        lesid = lesid
         vraag_id = uuid.uuid4()
-        # Als de vraag al bestaat, dan wordt hij geupdatet
-        cursor.execute(f"INSERT INTO Vraag (vraag_id, les_id, vraag) VALUES ('{vraag_id}', {lesid}, '{vraag}') ON CONFLICT DO UPDATE SET vraag = '{vraag}'")
+        # zie readme
+        cursor.execute(f"DELETE FROM Vraag WHERE les_id = {lesid};")
+        cursor.execute(f"INSERT INTO Vraag (vraag_id, les_id, vraag) VALUES ('{vraag_id}', {lesid}, '{vraag}')")
         cursor.connection.commit()

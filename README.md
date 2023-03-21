@@ -30,7 +30,30 @@ er staan tot nu toe 3 studenten in de database:
 ## QR genereren
 De QR code word gegenereerd door een library. In de div met de ID `qrcode` word een qr code gezet
 
+## Ajax vraag
+##### Wouter Oogjen
+De vraag word opgehaald met een ajax call. Maar hoe weet je of je iets moet inserten of updaten?
+Mijn plan daarvoor was om een hidden input te maken met de vraagID, maar dat zou niet secuur zijn. Een student
+zou met inspect element het uit kunnen zetten en aanpassen.
 
+Ik zou een functie kunnen maken dat ophaalt in de database of de vraag al bestaat, maar ik ben bang dat
+je dan de server gaat ddos-en. Met elke toetsaanslag de database checken is niet echt slim. 2 toetsaanslagen
+per seconde (misschien nog wel meer) is 4 query's loslaten op de database per seconde.
+
+Toen was mijn plan om dit op te lossen met een slimme SQL Query.
+```` SQLite
+INSERT INTO Vraag (vraag_id, les_id, vraag) VALUES ("vraagid", Lesid, "vraag") ON CONFLICT DO UPDATE SET vraag = 'Nieuwe waarde') 
+````
+
+Maar, in de functie insert_vraag maak je al een vraagid aan. Dat betekent dat alle vragen die je aanmaakt
+een uniek id hebben. Dus ze hebben altijd een uniek id. Toen heb ik besloten om een andere manier te gebruiken.
+
+```SQLite
+DELETE FROM Vraag WHERE les_id = {lesid};
+INSERT INTO Vraag (vraag_id, les_id, vraag) VALUES ('{vraag_id}', {lesid}, '{vraag}');
+```
+
+Kortom, eerst deleten en dan inserten. Ik ben er niet blij mee, maar het werkt wel. 
 # Bronnen
 - https://getbootstrap.com/
 - https://getbootstrap.com/docs/5.2/examples/

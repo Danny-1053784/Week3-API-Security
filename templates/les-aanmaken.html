@@ -116,13 +116,36 @@
        
       </div>
   </div>
+  <script type="application/javascript">
+
+    function submitLesInfo() {
+    var les_naam = document.getElementById("les_naam").value;
+    var lokaal = document.getElementById("lokaal").value;
+    
+    var docent_id = 0;
+    var klas_id = 0
+    
+    var start_date = document.getElementById("start_date").value;
+    var start_date = start_date.replace("T", " ");
+    var end_date = document.getElementById("end_date").value;
+    var end_date = end_date.replace("T", " ");
   
-  <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
-    integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous">
+    var server_data = [
+      docent_id,
+      klas_id,
+      les_naam,
+      lokaal,
+      start_date,
+      end_date
+      
+    ] ;
+   
+  console.log(server_data)
+    }
+
+
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
-    integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous">
-  </script>
+  
   
 
   {% include 'header.html' %}

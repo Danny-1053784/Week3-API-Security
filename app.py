@@ -64,11 +64,22 @@ def aanwezigheid_post(lesid):
     print(output)
     return output
 
+@app.route('/add-user', methods=['POST'])
+def add_user():
+    studentnummer = request.json['studentnummer']
+    user = dbu(studentnummer_id=studentnummer)
+    dbu.session.add(user)
+    dbu.session.commit()
+    return jsonify({'success': True})
+
 @app.route('/set_student_aanwezig', methods=['GET', 'POST'])
 def set_student_aanwezig():
     url = request.args.get(studentnummer=1025561) 
-    #response = pass
-    return url
+    student_id = request.form['studentnummer']
+    dbu.session.add(student_id)
+    dbu.session.commit()
+    users = student_id.query.all()
+    return render_template('aanwezigheid.html', users=users)
 
 
 @app.route('/les-aanmaken')

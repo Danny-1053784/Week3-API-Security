@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>aanwezigheid</title>
+  </head>
+  <body>
+    <h1>Wat is uw studentnummer</h1>
+    <form id="add-user-form">
+      <label for="studentnummer">Studentnummer:</label>
+      <input type="text" id="studentnummer" name="studentnummer"><br><br>
+      <button type="submit">Submit</button>
+    </form>
+    <h1>Users</h1>
+    <ul id="users-list">
+    </ul>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#add-user-form').submit(function(event) {
+          event.preventDefault();
+          var studentnummer = $('#studentnummer').val();
+          $.ajax({
+            url: '/add-user',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({studentnummer: studentnummer}),
+            success: function(response) {
+              console.log(response);
+              $('#studentnummer').val('');
+              $('#users-list').append('<li>' + studentnummer + '</li>');
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

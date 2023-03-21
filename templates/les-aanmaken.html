@@ -125,27 +125,31 @@
   </div>
   <script type="application/javascript">
 
-    function submitLesInfo() {
-    var les_naam = document.getElementById("les_naam").value;
-    var lokaal = document.getElementById("lokaal").value;
-    
-    var docent_id = 0;
-    var klas_id = 0
-    
-    var start_date = document.getElementById("start_date").value;
-    var start_date = start_date.replace("T", " ");
-    var end_date = document.getElementById("end_date").value;
-    var end_date = end_date.replace("T", " ");
+function submitLesInfo() {
+  var klas_id = $('#klas_id_select').find(":selected").val();
+  // var klas_id = document.getElementById("klas_id");
+  // var klas_value = klas_id.value;
+  // console.log(klas_value)
+  console.log(klas_id)
+
+  var les_naam = document.getElementById("les_naam").value;
+  var lokaal = document.getElementById("lokaal").value;
   
-    var server_data = [
-      docent_id,
-      klas_id,
-      les_naam,
-      lokaal,
-      start_date,
-      end_date
-      
-    ] ;
+ 
+  var start_date = document.getElementById("start_date").value;
+  var start_date = start_date.replace("T", " ");
+  var end_date = document.getElementById("end_date").value;
+  var end_date = end_date.replace("T", " ");
+
+  var server_data = [
+    
+    klas_id,
+    les_naam,
+    lokaal,
+    start_date,
+    end_date
+    
+  ] ;
    
   console.log(server_data)
 

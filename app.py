@@ -74,17 +74,20 @@ def lesAanmaken():
 def les_aanmaken_docent():
   if request.method == "POST":
     les_aanmaken_data = request.get_json()
-    docent_id = les_aanmaken_data[0]
-    klas_id = les_aanmaken_data[1]
-    les_naam = les_aanmaken_data[2]
-    lokaal = les_aanmaken_data[3]
-    start_date = les_aanmaken_data[4]
-    end_date = les_aanmaken_data[5]
+    docent_id = session['docent_id']
+    klas = les_aanmaken_data[0]
+    les_naam = les_aanmaken_data[1]
+    lokaal = les_aanmaken_data[2]
+    start_date = les_aanmaken_data[3]
+    end_date = les_aanmaken_data[4]
+    klas_value = dbm.read_klas_by_name(klas)
 
     # print(test_id) 
     print(start_date)
     print(end_date)
-    dbm.insert_les_docent(docent_id,klas_id,les_naam,lokaal,start_date,end_date)
+    print(klas_value)
+    dbm.insert_les_docent(docent_id,klas_value,les_naam,lokaal,start_date,end_date)
+
 
     return ("les aangemaakt")
 

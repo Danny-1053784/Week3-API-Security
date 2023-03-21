@@ -93,3 +93,12 @@ class DatabaseModel:
         table_content =[ table_content[0] for table_content in cursor.fetchall()]
         # Note that this method returns 2 variables!
         return table_content
+    
+    def read_klas_by_name(self, klas):
+         
+        cursor = sqlite3.connect(self.database_file).cursor()
+        cursor.execute("SELECT klas_id FROM klas WHERE naam_klas = '1A'")
+            
+        table_content = cursor.fetchone()[0]
+
+        return table_content  

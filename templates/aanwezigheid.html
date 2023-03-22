@@ -10,18 +10,7 @@
    
 </head>
 <body>
-<!--  
-<div id="LeerlingnummerStudent"></div>
-<div id ="aanwezig"></div>
-<script>   
-    var studentnummer = prompt('Wat is uw studentnummer? ' + ' ')
-    var tekst = 'Uw studentnummer is: ' + studentnummer;
-    var aanwezigheid = 'Je bent aanwezig!'
-    
-    document.getElementById('LeerlingnummerStudent').innerHTML = tekst
-    document.getElementById('aanwezig').innerHTML = aanwezigheid
-</script>
--->
+
 
 <label for="studentnummer">Studentnummer:</label> <input type="number" id="studentnummer" name="studentnummer"><br>
 <label for="name">Naam:</label><input type="text" id="name" name="name"><br>
@@ -42,6 +31,7 @@
         const s = JSON.stringify(dict_values); // Stringify converts a JavaScript object or value to a JSON string
         console.log(s); // Prints the variables to console window, which are in the JSON format
         //window.alert(s)
+
         $.ajax({
             url:"/aanwezigheidpost/{{lesid}}",
             type:"POST",
@@ -62,27 +52,6 @@
 
 </script>
 
-<!--
-<script type="application/javascript">
-    function post_aanwezigheid() {
-        $.ajax({
-            url: "/aanwezigheidpost/{{lesid}}",
-            type: "POST",
-            contentType: "json",
-            data: JSON.stringify({
-               studentnummer
-            }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                console.log(data)
-            },
-            failure: function (errMsg) {
-                console.log(errMsg)
-            }
-        })
-    }
-</script>
--->
+
 </body>
 </html>

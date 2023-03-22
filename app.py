@@ -81,6 +81,18 @@ def aanwezigheid_post(lesid = None):
     dbm.insert_aanwezigheid(studentnummer, lesid, antwoord_vraag)
     return output
 
+
+@app.route('/set_student_aanwezig', methods=['GET', 'POST'])
+def set_student_aanwezig():
+    if request.method == "POST":
+        aanwezigheid_data = request.get_json()
+        studentnummer = aanwezigheid_data[1]
+        naam = aanwezigheid_data[0]
+        vraag = aanwezigheid_data[2]
+        print(aanwezigheid_data)
+        return ("je staat aanwezig")
+    
+
 @app.route('/les-aanmaken')
 def lesAanmaken():
     voornaam=session['docent_naam']

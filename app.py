@@ -74,13 +74,15 @@ def add_user():
 
 @app.route('/set_student_aanwezig', methods=['GET', 'POST'])
 def set_student_aanwezig():
-    url = request.args.get(studentnummer=1025561) 
-    student_id = request.form['studentnummer']
-    dbu.session.add(student_id)
-    dbu.session.commit()
-    users = student_id.query.all()
-    return render_template('aanwezigheid.html', users=users)
-
+    if request.method == "POST":
+        aanwezigheid_data = request.get_json()
+        studentnummer = aanwezigheid_data[1]
+        naam = aanwezigheid_data[0]
+        vraag = aanwezigheid_data[2]
+        print(aanwezigheid_data)
+        dbm
+        return ("je staat aanwezig")
+    
 
 @app.route('/les-aanmaken')
 def lesAanmaken():

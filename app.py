@@ -64,13 +64,6 @@ def aanwezigheid_post(lesid):
     print(output)
     return output
 
-@app.route('/add-user', methods=['POST'])
-def add_user():
-    studentnummer = request.json['studentnummer']
-    user = dbu(studentnummer_id=studentnummer)
-    dbu.session.add(user)
-    dbu.session.commit()
-    return jsonify({'success': True})
 
 @app.route('/set_student_aanwezig', methods=['GET', 'POST'])
 def set_student_aanwezig():
@@ -80,7 +73,6 @@ def set_student_aanwezig():
         naam = aanwezigheid_data[0]
         vraag = aanwezigheid_data[2]
         print(aanwezigheid_data)
-        dbm
         return ("je staat aanwezig")
     
 

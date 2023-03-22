@@ -10,18 +10,7 @@
    
 </head>
 <body>
-<!--  
-<div id="LeerlingnummerStudent"></div>
-<div id ="aanwezig"></div>
-<script>   
-    var studentnummer = prompt('Wat is uw studentnummer? ' + ' ')
-    var tekst = 'Uw studentnummer is: ' + studentnummer;
-    var aanwezigheid = 'Je bent aanwezig!'
-    
-    document.getElementById('LeerlingnummerStudent').innerHTML = tekst
-    document.getElementById('aanwezig').innerHTML = aanwezigheid
-</script>
--->
+
 
 <label for="studentnummer">Studentnummer:</label> <input type="text" id="studentnummer" name="studentnummer"><br>
 <label for="name">Name:</label><input type="text" id="name" name="name"><br>
@@ -36,14 +25,14 @@
         const vraag = document.getElementById("vraag").value;
         
         const dict_values = {firstname, studentnummer, vraag} //Pass the javascript variables to a dictionary.
-        const s = JSON.stringify(dict_values); // Stringify converts a JavaScript object or value to a JSON string
-        console.log(s); // Prints the variables to console window, which are in the JSON format
-        window.alert(s)
+         // Stringify converts a JavaScript object or value to a JSON string
+        console.log(dict_values); // Prints the variables to console window, which are in the JSON format
+        window.alert(dict_values)
         $.ajax({
             url:"/aanwezigheidpost/{{lesid}}",
             type:"POST",
             contentType: "application/json",
-            data: JSON.stringify(s),
+            data: JSON.stringify(dict_values),
             succes: function(result){
                 console.log(result)
             },
@@ -53,27 +42,6 @@
 
 </script>
 
-<!--
-<script type="application/javascript">
-    function post_aanwezigheid() {
-        $.ajax({
-            url: "/aanwezigheidpost/{{lesid}}",
-            type: "POST",
-            contentType: "json",
-            data: JSON.stringify({
-               studentnummer
-            }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function (data) {
-                console.log(data)
-            },
-            failure: function (errMsg) {
-                console.log(errMsg)
-            }
-        })
-    }
-</script>
--->
+
 </body>
 </html>

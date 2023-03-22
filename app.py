@@ -53,15 +53,32 @@ def meeting_docent():
     meeting_docent = dbm.get_les_docent(docent_id)
     return jsonify(meeting_docent)
 
-@app.route('/aanwezigheid/<lesid>')
+@app.route('/aanwezigheid/<lesid>', methods=["GET", "POST"])
 def aanwezigheid(lesid):
-    return render_template('aanwezigheid.html', lesid=lesid)
+    content = dbm.get_table_content("Vraag", "les_id", lesid)
+    print(content)
+    content = content[0]
+    print(content)
+    # get the last element of the list
+    content = content[0]
+    print(content)
+    return render_template('aanwezigheid.html', lesid=lesid, content=content)
 
+# Deze route word aangeroepen door de Ajax om studenten te halen die zich in de les hebben ingeschreven.
+@app.route("/getleerlingen/<lesid>", methods=["GET"])
+def getleerlingen(lesid = None):
+    aanwezigeleerlingen = dbm.get_aanwezige_studenten(lesid)
+    return jsonify(aanwezigeleerlingen)
+
+# Gemaakt door Bryan, ik (Wouter) heb een paar dingen aangepast
 @app.route("/aanwezigheidpost/<lesid>", methods=["POST"])
-def aanwezigheid_post(lesid):
+def aanwezigheid_post(lesid = None):
     output = request.get_json()
     studentnummer = output["studentnummer"]
+    antwoord_vraag = output["vraag"]
+    print("We gaan nu de output printen")
     print(output)
+    dbm.insert_aanwezigheid(studentnummer, lesid, antwoord_vraag)
     return output
 
 
@@ -79,7 +96,29 @@ def set_student_aanwezig():
 @app.route('/les-aanmaken')
 def lesAanmaken():
     voornaam=session['docent_naam']
-    return render_template('les-aanmaken.html', voornaam=voornaam)
+    klas = dbm.read_klas_name_update()
+    return render_template('les-aanmaken.html', voornaam=voornaam,klas=klas)
+
+@app.route('/les_aanmaken_post', methods=['POST', 'GET'])
+def les_aanmaken_docent():
+  if request.method == "POST":
+    les_aanmaken_data = request.get_json()
+    docent_id = session['docent_id']
+    klas = les_aanmaken_data[0]
+    les_naam = les_aanmaken_data[1]
+    lokaal = les_aanmaken_data[2]
+    start_date = les_aanmaken_data[3]
+    end_date = les_aanmaken_data[4]
+    klas_value = dbm.read_klas_by_name(klas)
+
+    # print(test_id)
+    print(start_date)
+    print(end_date)
+    print(klas_value)
+    dbm.insert_les_docent(docent_id,klas_value,les_naam,lokaal,start_date,end_date)
+
+
+    return ("les aangemaakt")
 
 @app.route('/admin')
 def admin():
@@ -107,7 +146,7 @@ def leerlingen_aanwezigheid(naam = None):
     # haal de leerlingen op uit de database als naam niet is meegegeven
     # zoek naar een specifieke leerling uit de database als naam wel is meegegeven
     naam = request.form.get("naam")
-    voornaam=session['docent_naam']  
+    voornaam=session['docent_naam']
     if naam is None or naam == '':
         print("naam is none")
         students = dbm.get_students()
@@ -124,6 +163,16 @@ def leerling_details(studentid = None):
     print(studentid)
     # ga naar leerling_details.html en geef studentid mee
     return render_template("leerling_details.html", studentid=studentid, aanwezigheid=aanwezigheid)
+
+# Dit is een functie die de vraag tabel gaat invullen (Wouter)
+@app.route("/vraagles/<lesid>", methods=["POST"])
+def vraagles(lesid = None):
+    vraag = request.form.get("vraag")
+    print(vraag)
+    print(lesid)
+    dbm.insert_vraag(lesid, vraag)
+    return "De vraag " + vraag + " is toegevoegd aan les " + lesid
+
 
 @app.route('/logout')
 def logout():

@@ -1,5 +1,6 @@
 import os
 import sqlite3
+import uuid
 
 class DatabaseModel:
     """This class is a wrapper around the sqlite3 database. It provides a simple interface that maps methods
@@ -36,7 +37,7 @@ class DatabaseModel:
 
     def get_les_docent(self, docent_id):
         cursor = sqlite3.connect(self.database_file).cursor()
-        cursor.execute(f"SELECT * FROM les WHERE docent_id = {docent_id}")
+        cursor.execute(f"SELECT * FROM `les` as pt LEFT JOIN `klas` as pb ON pt.klas_id = pb.klas_id WHERE docent_id = {docent_id}")
         docent = cursor.fetchall()
         return docent
 
@@ -58,6 +59,19 @@ class DatabaseModel:
         students = cursor.fetchall()
         return students
 
+    # Dit is een functie die de aanwezigheid tabel invult (Wouter)
+    def insert_aanwezigheid(self, student_id, les_id, antwoord_vraag):
+        if student_id is None or les_id is None:
+            print("Er is geen student_id of les_id meegegeven")
+        else:
+            cursor = sqlite3.connect(self.database_file).cursor()
+            id = uuid.uuid4()
+            print(id)
+            cursor.execute(f"INSERT INTO aanwezigheid (aanwezigheid_id, inchecktijd, les_id, student_id, antwoord_vraag) VALUES ('{id}', datetime('now'), {les_id}, {student_id}, '{antwoord_vraag}')")
+            cursor.connection.commit()
+            print("De aanwezigheid is toegevoegd")
+            print(student_id, les_id, antwoord_vraag)
+
     # Dit is een functie die alle studenten ophaalt op basis van de aanwezigheid tabel. Hij haalt dan meteen ook alle data op uit de les tabel(Wouter)
     def get_aanwezigheid_student(self, studentid):
         cursor = sqlite3.connect(self.database_file).cursor()
@@ -77,3 +91,46 @@ class DatabaseModel:
         # 11 = actief
         aanwezigheid = cursor.fetchall()
         return aanwezigheid
+
+    def insert_les_docent(self,docent_id,klas_id,les_naam,lokaal,start_date,end_date):
+        value1= str(les_naam)
+        value2= str(lokaal)
+
+        cursor = sqlite3.connect(self.database_file).cursor()
+        cursor.execute('INSERT INTO les(docent_id,klas_id,les_naam,lokaal,start_date,end_date) VALUES(?,?,?,?,?,?)', [docent_id,klas_id,value1,value2,start_date,end_date,] )
+        cursor.connection.commit()
+
+    def read_klas_name_update(self):
+        cursor = sqlite3.connect(self.database_file).cursor()
+        cursor.execute("SELECT naam_klas,klas_id from klas group by naam_klas")
+
+        table_content =[ table_content[0] for table_content in cursor.fetchall()]
+        # Note that this method returns 2 variables!
+        return table_content
+
+    def read_klas_by_name(self, klas):
+
+        cursor = sqlite3.connect(self.database_file).cursor()
+        cursor.execute(f"SELECT klas_id FROM klas WHERE naam_klas = '{klas}'")
+
+        table_content = cursor.fetchone()[0]
+
+        return table_content
+
+    # Dit is een functie die een object toevoegt aan de vraag tabel (Wouter)
+    def insert_vraag(self, lesid, vraag):
+        print("We zijn nu in de insert_vraag functie en de vraag " + vraag + " wordt toegevoegd aan de database met het lesid " + lesid)
+        cursor = sqlite3.connect(self.database_file).cursor()
+        vraag_id = uuid.uuid4()
+        # zie readme
+        cursor.execute(f"DELETE FROM Vraag WHERE les_id = {lesid};")
+        cursor.execute(f"INSERT INTO Vraag (vraag_id, les_id, vraag) VALUES ('{vraag_id}', {lesid}, '{vraag}')")
+        cursor.connection.commit()
+
+    # Dit is een functie die alle studenten returnt (Wouter)
+    def get_aanwezige_studenten(self, lesid):
+        cursor = sqlite3.connect(self.database_file).cursor()
+        cursor.execute(f"SELECT aanwezigheid.inchecktijd, aanwezigheid.antwoord_vraag, student.voornaam, student.achternaam FROM aanwezigheid, student WHERE aanwezigheid.student_id = student.student_id and aanwezigheid.les_id = {lesid};")
+        aanwezigestudenten = cursor.fetchall()
+        print(aanwezigestudenten)
+        return aanwezigestudenten

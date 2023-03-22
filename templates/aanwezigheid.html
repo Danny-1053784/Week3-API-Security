@@ -12,30 +12,40 @@
 <body>
 
 
-<label for="studentnummer">Studentnummer:</label> <input type="text" id="studentnummer" name="studentnummer"><br>
-<label for="name">Name:</label><input type="text" id="name" name="name"><br>
-<label for="vraag">Stel een vraag:<input type="textarea" id="vraag"></label><br>
+<label for="studentnummer">Studentnummer:</label> <input type="number" id="studentnummer" name="studentnummer"><br>
+<label for="name">Naam:</label><input type="text" id="name" name="name"><br>
+<label for="vraag">{{ content[2] }}<textarea id="vraag" name="vraag"></textarea></label><br>
 <button type="submit" onclick="post_aanwezigheid()">Submit</button>
 
+<!-- Functie gemaakt door Bryan en aangepast door Wouter-->
 <script>
     function post_aanwezigheid() {
 
         const firstname = document.getElementById("name").value;
         const studentnummer = document.getElementById("studentnummer").value;
         const vraag = document.getElementById("vraag").value;
-        
-        const dict_values = {firstname, studentnummer, vraag} //Pass the javascript variables to a dictionary.
-         // Stringify converts a JavaScript object or value to a JSON string
-        console.log(dict_values); // Prints the variables to console window, which are in the JSON format
-        window.alert(dict_values)
+        const lesid = {{lesid}};
+        console.log(firstname, studentnummer, vraag, lesid)
+
+        const dict_values = {firstname, studentnummer, vraag, lesid} //Pass the javascript variables to a dictionary.
+        const s = JSON.stringify(dict_values); // Stringify converts a JavaScript object or value to a JSON string
+        console.log(s); // Prints the variables to console window, which are in the JSON format
+        //window.alert(s)
+
         $.ajax({
             url:"/aanwezigheidpost/{{lesid}}",
             type:"POST",
             contentType: "application/json",
-            data: JSON.stringify(dict_values),
-            succes: function(result){
-                console.log(result)
+            data: s, // <-- Hier zat een fout
+            // Hier stond "data: JSON.stringify(s)"
+            // En omdat je al in regel 40 stringify hebt gebruikt, is het niet nodig om het nog een keer te doen.
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
             },
+            error: function (errMsg) {
+                console.log(errMsg)
+            }
         });
 
 }

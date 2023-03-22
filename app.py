@@ -74,10 +74,6 @@ def getleerlingen(lesid = None):
 @app.route("/aanwezigheidpost/<lesid>", methods=["POST"])
 def aanwezigheid_post(lesid = None):
     output = request.get_json()
-    if output is None:
-        print("Output is none")
-        pass
-    print("We zijn nu in de aanwezigheidpost functie")
     studentnummer = output["studentnummer"]
     antwoord_vraag = output["vraag"]
     print("We gaan nu de output printen")
@@ -87,7 +83,39 @@ def aanwezigheid_post(lesid = None):
 
 @app.route('/les-aanmaken')
 def lesAanmaken():
-    return render_template('les-aanmaken.html')
+    voornaam=session['docent_naam']
+    klas = dbm.read_klas_name_update()
+    return render_template('les-aanmaken.html', voornaam=voornaam,klas=klas)
+
+@app.route('/les_aanmaken_post', methods=['POST', 'GET'])
+def les_aanmaken_docent():
+  if request.method == "POST":
+    les_aanmaken_data = request.get_json()
+    docent_id = session['docent_id']
+    klas = les_aanmaken_data[0]
+    les_naam = les_aanmaken_data[1]
+    lokaal = les_aanmaken_data[2]
+    start_date = les_aanmaken_data[3]
+    end_date = les_aanmaken_data[4]
+    klas_value = dbm.read_klas_by_name(klas)
+
+    # print(test_id)
+    print(start_date)
+    print(end_date)
+    print(klas_value)
+    dbm.insert_les_docent(docent_id,klas_value,les_naam,lokaal,start_date,end_date)
+
+
+    return ("les aangemaakt")
+
+@app.route('/admin')
+def admin():
+    if 'username' in session:
+        voornaam=session['docent_naam']
+        return render_template('admin.html', voornaam=voornaam)
+    else:
+        return redirect(url_for('index'))
+
 
 # de pagina waar de qr code op komt te staan (Wouter)
 @app.route("/qrcode/<lesid>", methods=["GET", "POST"])
@@ -106,13 +134,14 @@ def leerlingen_aanwezigheid(naam = None):
     # haal de leerlingen op uit de database als naam niet is meegegeven
     # zoek naar een specifieke leerling uit de database als naam wel is meegegeven
     naam = request.form.get("naam")
+    voornaam=session['docent_naam']
     if naam is None or naam == '':
         print("naam is none")
         students = dbm.get_students()
     else:
         print("naam is niet none")
         students = dbm.get_students(naam)
-    return render_template("leerlingen_aanwezigheid.html", students=students)
+    return render_template("leerlingen_aanwezigheid.html", students=students, voornaam=voornaam)
 
 # De pagina waar de details van de leerlingen staan (Wouter)
 @app.route("/leerling_details/<studentid>", methods=["GET", "POST"])
@@ -132,6 +161,11 @@ def vraagles(lesid = None):
     dbm.insert_vraag(lesid, vraag)
     return "De vraag " + vraag + " is toegevoegd aan les " + lesid
 
+
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
 
 if __name__ == "__main__":
     app.run(host=FLASK_IP, port=FLASK_PORT, debug=FLASK_DEBUG)

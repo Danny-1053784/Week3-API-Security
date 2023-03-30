@@ -11,12 +11,12 @@
     <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.9.1.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/dashboard.css" type="text/css">
     <link rel="stylesheet" href="/static/qrcode.css" type="text/css">
 
     <style>
         body{
         text-align: center;
+        margin-top: 5%;
         }
         .qrcode{
             text-align: center;
@@ -24,8 +24,8 @@
     </style>
 </head>
 <body>
-{% include 'header.html' %}
-
+    {% include 'header.html' %}
+<br><br>
 <p> Dit is de pagina waarop de qr code komt te staan</p>
 <center>
 <div id="qrcode"></div>

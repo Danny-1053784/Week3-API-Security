@@ -6,17 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Javascript</title>
     <link rel="stylesheet" href="/static/aanwezigheid.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-   
 </head>
 <body>
+{% include 'header.html' %}
 
-
-<label for="studentnummer">Studentnummer:</label> <input type="number" id="studentnummer" name="studentnummer"><br>
-<label for="name">Naam:</label><input type="text" id="name" name="name"><br>
-<label for="vraag">{{ content[2] }}<textarea id="vraag" name="vraag"></textarea></label><br>
+<div id="aanwezigform">
+<img src="/static/images/HRbackground.jpg" alt="hrlogo" width="250" height="150"><br><br>
+<label for="studentnummer">Studentnummer:</label><br><input type="number" id="studentnummer" name="studentnummer"><br>
+<label for="name">Naam:</label><br><input type="text" id="name" name="name"><br>
+<label for="vraag">{{ content[2] }} <br><textarea id="vraag" name="vraag"></textarea></label><br>
 <button type="submit" onclick="post_aanwezigheid()">Submit</button>
-
+</div>
 <!-- Functie gemaakt door Bryan en aangepast door Wouter-->
 <script>
     function post_aanwezigheid() {
@@ -24,12 +26,10 @@
         const firstname = document.getElementById("name").value;
         const studentnummer = document.getElementById("studentnummer").value;
         const vraag = document.getElementById("vraag").value;
-        const lesid = {lesid};
-        //ik hoop dat het nu wel werkt :)
+        const les_id = {lesid};
+        console.log(firstname, studentnummer, vraag, les_id)
 
-        console.log(firstname, studentnummer, vraag, lesid)
-
-        const dict_values = {firstname, studentnummer, vraag, lesid} //Pass the javascript variables to a dictionary.
+        const dict_values = {firstname, studentnummer, vraag, les_id} //Pass the javascript variables to a dictionary.
         const s = JSON.stringify(dict_values); // Stringify converts a JavaScript object or value to a JSON string
         console.log(s); // Prints the variables to console window, which are in the JSON format
         //window.alert(s)
@@ -49,7 +49,7 @@
                 console.log(errMsg)
             }
         });
-
+    
 }
 
 </script>

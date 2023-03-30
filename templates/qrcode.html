@@ -10,11 +10,17 @@
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.9.1.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/qrcode.css" type="text/css">
+
 </head>
 <body>
-
+    {% include 'header.html' %}
+<br><br>
 <p> Dit is de pagina waarop de qr code komt te staan</p>
+<center>
 <div id="qrcode"></div>
+</center>
 <a href="/aanwezigheid/{{lesid}}">{{ lesid }}</a><br>
 <form action="/aanwezigheid/{{lesid}}" method="post">
     <textarea name="vraag" id="vraag" class="vraag"></textarea>
@@ -24,6 +30,7 @@
 <div id="Resultaten">
 
 </div>
+
 
 <script>
     var qrcode = new QRCode("qrcode", {

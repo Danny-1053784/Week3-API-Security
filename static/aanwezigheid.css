@@ -1,5 +1,13 @@
 html,
-body {
-    background-color: #f8f5ee;   
+body{
+    background-color: #f8f5ee; 
+    text-align: center;
+    margin-top: 5%;
+}
+#aanwezigform{
+    text-align: center;
+    background-color: #f8f5ee; 
+    
 }
 
+    

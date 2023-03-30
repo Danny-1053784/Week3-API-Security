@@ -1,10 +1,6 @@
 html,
 body {
-  height: 100%;
-  background-color: #f8f5ee; 
+    background-color: #f8f5ee; 
+    text-align: center;
+    margin-top: 1%;
 }
-
-.qrcodepagina{
-    text-align: right;
-}
-

@@ -119,28 +119,23 @@
        <input type="submit" name="next" value="Les toevoegen" onclick="submitLesInfo();">
    
        
-      
-       
       </div>
   </div>
   <script type="application/javascript">
 
+// store all values from the input fields in a variable(Danny)
 function submitLesInfo() {
   var klas_id = $('#klas_id_select').find(":selected").val();
-  // var klas_id = document.getElementById("klas_id");
-  // var klas_value = klas_id.value;
-  // console.log(klas_value)
-  console.log(klas_id)
 
   var les_naam = document.getElementById("les_naam").value;
   var lokaal = document.getElementById("lokaal").value;
   
- 
   var start_date = document.getElementById("start_date").value;
   var start_date = start_date.replace("T", " ");
   var end_date = document.getElementById("end_date").value;
   var end_date = end_date.replace("T", " ");
 
+  // store all values in an array(Danny)
   var server_data = [
     
     klas_id,
@@ -152,6 +147,7 @@ function submitLesInfo() {
   ] ;
    
   console.log(server_data)
+// send the array to app.py function to store in the database(Danny)
 
   $.ajax({
   type: "POST",
@@ -160,7 +156,6 @@ function submitLesInfo() {
   contentType: "application/json",
   dataType: 'json',
   success: function(result) {
-    
     
     console.log("alle data" , server_data);
   

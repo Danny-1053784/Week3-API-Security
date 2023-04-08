@@ -92,13 +92,14 @@ def set_student_aanwezig():
         print(aanwezigheid_data)
         return ("je staat aanwezig")
     
-
+# route voor de docent om een les aan te maken (Danny)
 @app.route('/les-aanmaken')
 def lesAanmaken():
     voornaam=session['docent_naam']
     klas = dbm.read_klas_name_update()
     return render_template('les-aanmaken.html', voornaam=voornaam,klas=klas)
 
+# insert les docent (Danny)
 @app.route('/les_aanmaken_post', methods=['POST', 'GET'])
 def les_aanmaken_docent():
   if request.method == "POST":
@@ -119,7 +120,7 @@ def les_aanmaken_docent():
 
 
     return ("les aangemaakt")
-
+# Route for the dashboard with user authentication (Danny)
 @app.route('/admin')
 def admin():
     if 'username' in session:

@@ -1,23 +1,12 @@
-/* <!-- This page contains the css for the admin and front-desk page
-	 Author: Danny van Schijndel
-	 Date: 26-06-2020 --> */
-
-
-
-
 
 body {
   padding-top: 50px;
 }
 
-
-
-
 .sub-header {
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
 }
-
 /*
  * Top navigation
  
@@ -25,8 +14,6 @@ body {
 .navbar-fixed-top {
   border: 0;
 }
-
-
 
 /* Hide for mobile, show later */
 .sidebar {

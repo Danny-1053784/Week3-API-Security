@@ -42,8 +42,9 @@ def login():
         if dbu.user_login(gebruikersnaam, wachtwoord):
             session['username'] = gebruikersnaam
             voornaam=session['docent_naam']
+            achternaam = session['docent_achternaam']
             return render_template(
-            "admin.html", voornaam=voornaam)
+            "admin.html", voornaam=voornaam, achternaam=achternaam)
         else:
             return redirect(url_for('index'))
 
@@ -96,8 +97,9 @@ def set_student_aanwezig():
 @app.route('/les-aanmaken')
 def lesAanmaken():
     voornaam=session['docent_naam']
+    achternaam = session['docent_achternaam']
     klas = dbm.read_klas_name_update()
-    return render_template('les-aanmaken.html', voornaam=voornaam,klas=klas)
+    return render_template('les-aanmaken.html', voornaam=voornaam,achternaam=achternaam,klas=klas)
 
 # insert les docent (Danny)
 @app.route('/les_aanmaken_post', methods=['POST', 'GET'])
@@ -125,7 +127,8 @@ def les_aanmaken_docent():
 def admin():
     if 'username' in session:
         voornaam=session['docent_naam']
-        return render_template('admin.html', voornaam=voornaam)
+        achternaam = session['docent_achternaam']
+        return render_template('admin.html', voornaam=voornaam, achternaam=achternaam)
     else:
         return redirect(url_for('index'))
 

@@ -79,7 +79,7 @@ def aanwezigheid_post(lesid = None):
     print("We gaan nu de output printen")
     print(output)
     dbm.insert_aanwezigheid(studentnummer, lesid, antwoord_vraag)
-    return output
+    return render_template('admin.html' , lesid=lesid)
 
 
 @app.route('/set_student_aanwezig', methods=['GET', 'POST'])

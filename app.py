@@ -159,6 +159,7 @@ def leerlingen_aanwezigheid(naam = None):
 @app.route("/leerling_details/<studentid>", methods=["GET", "POST"])
 def leerling_details(studentid = None):
     # haal alles op uit de aanwezigheid tabel met de studentid
+    # We een query maken die al de lessen ophaalt waar de klas van de student in zit
     aanwezigheid = dbm.get_aanwezigheid_student(studentid)
     print(studentid)
     # ga naar leerling_details.html en geef studentid mee

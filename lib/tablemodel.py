@@ -72,7 +72,7 @@ class DatabaseModel:
             print("De aanwezigheid is toegevoegd")
             print(student_id, les_id, antwoord_vraag)
 
-    # Dit is een functie die alle studenten ophaalt op basis van de aanwezigheid tabel. Hij haalt dan meteen ook alle data op uit de les tabel(Wouter)
+    # Dit is een functie die alle lessen ophaalt uit de database met klas van de studentid (Wouter)
     def get_aanwezigheid_student(self, studentid):
         cursor = sqlite3.connect(self.database_file).cursor()
         # pak de aanwezigheid van de student en de les

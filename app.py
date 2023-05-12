@@ -79,7 +79,11 @@ def aanwezigheid_post(lesid = None):
     antwoord_vraag = output["vraag"]
     print("We gaan nu de output printen")
     print(output)
-    dbm.insert_aanwezigheid(studentnummer, lesid, antwoord_vraag)
+    student_id_raw = dbm.get_student_id(studentnummer)
+    student_id = ','.join(str(x) for x in student_id_raw)
+
+    print(student_id)
+    dbm.insert_aanwezigheid(student_id, lesid, antwoord_vraag)
     return render_template('admin.html' , lesid=lesid)
 
 

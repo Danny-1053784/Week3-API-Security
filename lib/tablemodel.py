@@ -58,6 +58,15 @@ class DatabaseModel:
             cursor.execute(f"SELECT * FROM student WHERE student_id LIKE '%{zoekterm}%' OR voornaam LIKE '%{zoekterm}%' OR achternaam LIKE '%{zoekterm}%'")
         students = cursor.fetchall()
         return students
+    
+    # get the studentnumber and convert it into the student email to get the student id
+    def get_student_id(self, studentnummer):
+        email = studentnummer + '@hr.nl'
+        print(email)
+        cursor = sqlite3.connect(self.database_file).cursor()
+        cursor.execute(f"SELECT student_id FROM student WHERE email = '{email}'")
+        student_id = cursor.fetchone()
+        return student_id
 
     # Dit is een functie die de aanwezigheid tabel invult (Wouter)
     def insert_aanwezigheid(self, student_id, les_id, antwoord_vraag):

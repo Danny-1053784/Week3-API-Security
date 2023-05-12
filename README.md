@@ -20,11 +20,19 @@ python app.py
 - Gebruikersnaam: Tjiddehr
 - Wachtwoord: Tjidde321!
 
+# Aanmelden student
+voor het aanmelden als student gebruik je een studenten nummer bijvoorbeeld: 
+
+Studentennummer: 1053784
+Naam: Danny
+antwoord vraag: Ja
+
 # Studenten 
 er staan tot nu toe 3 studenten in de database:
 - 0  Danny	van Schijndel	1053784@hr.nl
 - 1	 Bryan	Booij	1025561@hr.nl
 - 2	 Wouter	Oogjen	1052935@hr.nl
+
 
 
 ## QR genereren

@@ -9,10 +9,14 @@
 <!-- Dus, in de les staat welke klas de les is voor en die laten we zien -->
 <!-- Dan kunnen we daarvan kijken of de student is ingeschreven. -->
 <p>Je leerlingenid is {{ studentid }}.</p>
-{% for aanwezigheid in aanwezigheid %}
-    <h1> Aanwezigheid id is {{ aanwezigheid[0] }}</h1>
-    <h1> les is {{ aanwezigheid[4] }}</h1>
-{% endfor %}
+
+<!--
+Deze query moeten we gebruiken om de aanwezigheid op te halen
+SELECT student.student_id, student.voornaam, CASE WHEN aanwezigheid.student_id IS NULL THEN 'Absent' ELSE 'Present' END AS attendance_status
+FROM student, les
+LEFT JOIN aanwezigheid ON student.student_id = aanwezigheid.student_id
+WHERE les.les_naam = 'Werkplaats' and les.start_date = '2019-01-01';
+-->
 
 </body>
 </html>

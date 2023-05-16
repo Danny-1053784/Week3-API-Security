@@ -73,24 +73,12 @@ class DatabaseModel:
             print(student_id, les_id, antwoord_vraag)
 
     # Dit is een functie die alle lessen ophaalt uit de database met klas van de studentid (Wouter)
-    def get_aanwezigheid_student(self, studentid):
+    def get_lesnaam_klas_student(self, studentid):
         cursor = sqlite3.connect(self.database_file).cursor()
         # pak de aanwezigheid van de student en de les
-        cursor.execute(f"SELECT * FROM aanwezigheid, les WHERE student_id is {studentid} and aanwezigheid.les_id = les.les_id ORDER BY les.start_date DESC")
-        # 0 = aanwezigheid_id
-        # 1 = inchecktijd
-        # 2 = les_fk
-        # 3 = student_fk
-        # 4 = les_id
-        # 5 = docent_id
-        # 6 = klas_id
-        # 7 = les_naam
-        # 8 = lokaal
-        # 9 = start_date
-        # 10 = end_date
-        # 11 = actief
-        aanwezigheid = cursor.fetchall()
-        return aanwezigheid
+        cursor.execute(f"SELECT DISTINCT les_naam FROM `les` WHERE `klas_id` = (SELECT `klas_id` FROM `student` WHERE `student_id` = {studentid})")
+        lessen = cursor.fetchall()
+        return lessen
 
     def insert_les_docent(self,docent_id,klas_id,les_naam,lokaal,start_date,end_date):
         value1= str(les_naam)
@@ -134,3 +122,11 @@ class DatabaseModel:
         aanwezigestudenten = cursor.fetchall()
         print(aanwezigestudenten)
         return aanwezigestudenten
+
+    # Dit is een functie die alle aanwezige studenten returnt van een vak (Wouter)
+    def get_student_aanwezigheid(self, lesid, studentid):
+        cursor = sqlite3.connect(self.database_file).cursor()
+        # hier komt een query
+        # aanwezigheidstudenten = cursor.fetchall()
+        aanwezigheidstudenten = "kaas"
+        return aanwezigheidstudenten

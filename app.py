@@ -158,12 +158,10 @@ def leerlingen_aanwezigheid(naam = None):
 # De pagina waar de details van de leerlingen staan (Wouter)
 @app.route("/leerling_details/<studentid>", methods=["GET", "POST"])
 def leerling_details(studentid = None):
-    # haal alles op uit de aanwezigheid tabel met de studentid
-    # We een query maken die al de lessen ophaalt waar de klas van de student in zit
-    aanwezigheid = dbm.get_aanwezigheid_student(studentid)
     print(studentid)
+    lessen = dbm.get_all_le
     # ga naar leerling_details.html en geef studentid mee
-    return render_template("leerling_details.html", studentid=studentid, aanwezigheid=aanwezigheid)
+    return render_template("leerling_details.html", studentid=studentid, lessen=lessen)
 
 # Dit is een functie die de vraag tabel gaat invullen (Wouter)
 @app.route("/vraagles/<lesid>", methods=["POST"])

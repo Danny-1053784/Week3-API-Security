@@ -41,7 +41,7 @@
         <h1>Les aanmaken</h1>
       <div class="form-floating">
        <label>Naam van de les:</label>
-       <input type="text" name="les_naam" id="les_naam">
+       <input type="text" name="les_naam" id="les_naam" required>
       </div>
       <div class="form-floating">
        <label>Klas:</label>
@@ -111,7 +111,10 @@ function submitLesInfo() {
   
   } 
 });
+window.location.href = "/admin";
+
   }
+
 
   </script>
 

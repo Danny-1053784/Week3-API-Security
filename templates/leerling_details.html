@@ -9,7 +9,11 @@
 <!-- Dus, in de les staat welke klas de les is voor en die laten we zien -->
 <!-- Dan kunnen we daarvan kijken of de student is ingeschreven. -->
 <p>Je leerlingenid is {{ studentid }}.</p>
-
+<select name="les" id="les">
+    {% for les in lessen %}
+        <option value="{{ les[1] }}">{{ les[0] }}</option>
+    {% endfor %}
+</select>
 <!--
 Deze query moeten we gebruiken om de aanwezigheid op te halen
 SELECT student.student_id, student.voornaam, CASE WHEN aanwezigheid.student_id IS NULL THEN 'Absent' ELSE 'Present' END AS attendance_status

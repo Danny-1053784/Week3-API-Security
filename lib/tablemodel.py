@@ -76,7 +76,7 @@ class DatabaseModel:
     def get_lesnaam_klas_student(self, studentid):
         cursor = sqlite3.connect(self.database_file).cursor()
         # pak de aanwezigheid van de student en de les
-        cursor.execute(f"SELECT DISTINCT les_naam FROM `les` WHERE `klas_id` = (SELECT `klas_id` FROM `student` WHERE `student_id` = {studentid})")
+        cursor.execute(f"SELECT les_naam, MAX(les_id) AS les_id FROM les WHERE klas_id = (SELECT klas_id FROM student WHERE student_id = {studentid}) GROUP BY les_naam;")
         lessen = cursor.fetchall()
         return lessen
 

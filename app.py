@@ -159,7 +159,7 @@ def leerlingen_aanwezigheid(naam = None):
 @app.route("/leerling_details/<studentid>", methods=["GET", "POST"])
 def leerling_details(studentid = None):
     print(studentid)
-    lessen = dbm.get_all_le
+    lessen = dbm.get_lesnaam_klas_student(studentid)
     # ga naar leerling_details.html en geef studentid mee
     return render_template("leerling_details.html", studentid=studentid, lessen=lessen)
 

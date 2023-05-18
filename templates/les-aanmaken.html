@@ -16,11 +16,7 @@
   </head>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
-<style>
-.container-fluid{
-  display:;
-}
- </style> 
+
 </head>
 
 <body>
@@ -60,7 +56,7 @@
       </div>
       <div class="form-floating">
         <label>Begin datum en tijd:</label>
-       <input type="datetime-local" id="start_date" name="start_date">
+       <input type="datetime-local" id="start_date" name="start_date"  >
       </div>
       <div class="form-floating">
        <label>Eind datum en tijd:</label>
@@ -72,6 +68,13 @@
       </div>
   </div>
   <script type="application/javascript">
+// set the minimum date to the current date
+
+let dateInput = document.getElementById("start_date");
+dateInput.min = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
+
+let endDateInput = document.getElementById("end_date");
+endDateInput.min = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
 
 // store all values from the input fields in a variable(Danny)
 function submitLesInfo() {

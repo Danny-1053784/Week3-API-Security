@@ -1,7 +1,7 @@
 import os.path
 
 import sys
-from flask import Flask, render_template, redirect , request,send_from_directory, jsonify, session ,url_for, abort, make_response
+from flask import Flask, render_template, redirect, request, send_from_directory, jsonify, session ,url_for, abort, make_response
 
 
 from lib.tablemodel import DatabaseModel
@@ -155,13 +155,28 @@ def leerlingen_aanwezigheid(naam = None):
         students = dbm.get_students(naam)
     return render_template("leerlingen_aanwezigheid.html", students=students, voornaam=voornaam)
 
-# De pagina waar de details van de leerlingen staan (Wouter)
-@app.route("/leerling_details/<studentid>", methods=["GET", "POST"])
-def leerling_details(studentid = None):
-    print(studentid)
-    lessen = dbm.get_lesnaam_klas_student(studentid)
-    # ga naar leerling_details.html en geef studentid mee
-    return render_template("leerling_details.html", studentid=studentid, lessen=lessen)
+# Op deze pagina kan je selecteren van welk vak je de presentie van de student wilt zien (Wouter)
+@app.route("/leerling_details/<studentid>", methods=["POST"])
+def leerling_details(studentid):
+    if not studentid:
+        print("studentid is none")
+    else:
+        # hier halen we lessen op van de student. Die zetten we dan in de dropdown zodat je alleen kan kiezen uit de lessen die je volgt en niet dat je lessen krijgt van andere studenten.
+        lessen = dbm.get_lesnaam_klas_student(studentid)
+        print("studentid is " + studentid)
+        # nu moeten we kijken of de form is ingevuld
+        lesid = request.form.get('lesid')
+        # nu gaan we checken of lesid none is
+        if not lesid:
+            print("lesid is none")
+            return render_template("leerling_details.html", studentid=studentid, lessen=lessen)
+        else:
+            print("lesid is " + lesid)
+            # nu moeten we de lessen ophalen die de klas van de student had en of hij/zij/hun wel of niet aanwezig was
+            aangevraagdelessen = dbm.get_student_aanwezigheid(lesid, studentid)
+            print(aangevraagdelessen)
+            return render_template("leerling_details.html", studentid=studentid, lessen=lessen, aangevraagdelessen=aangevraagdelessen)
+
 
 # Dit is een functie die de vraag tabel gaat invullen (Wouter)
 @app.route("/vraagles/<lesid>", methods=["POST"])

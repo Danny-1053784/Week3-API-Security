@@ -126,7 +126,7 @@ class DatabaseModel:
     # Dit is een functie die alle aanwezige studenten returnt van een vak (Wouter)
     def get_student_aanwezigheid(self, lesid, studentid):
         cursor = sqlite3.connect(self.database_file).cursor()
-        # hier komt een query
-        # aanwezigheidstudenten = cursor.fetchall()
-        aanwezigheidstudenten = "kaas"
+        cursor.execute(f"SELECT DISTINCT les.start_date ,student.student_id, student.voornaam, les.les_naam, CASE WHEN aanwezigheid.student_id IS NULL THEN 'Afwezig' ELSE 'Present' END AS attendance_status FROM student, les LEFT JOIN aanwezigheid ON student.student_id = aanwezigheid.student_id WHERE les.les_id = '{lesid}' AND student.student_id = {studentid};")
+        aanwezigheidstudenten = cursor.fetchall()
+        print(aanwezigheidstudenten)
         return aanwezigheidstudenten

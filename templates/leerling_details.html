@@ -2,25 +2,82 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Details Leerling</title>
+
+    <link rel="stylesheet" href="/static/heroes.css" type="text/css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+  <style>
+
+    .tabel {
+        margin-top: 20px;
+        margin-bottom: 10px;
+        margin-left: 25%;
+    }
+
+    form {
+        margin-left: 18%;
+        margin-top: 1vh;
+    }
+
+    input[type="submit"], {
+        margin-left: 9%;
+    }
+</style>
 </head>
 <body>
+
+<!-- KIJK IN DE README.MD VOOR MEER INFORMATIE -->
+
+    <div class="container-fluid">
+        {% include 'sidebar.html' %}
+    </div>
+
 <!-- Deze pagina laat zien waar al de klas aanwezig moest zijn -->
 <!-- Dus, in de les staat welke klas de les is voor en die laten we zien -->
 <!-- Dan kunnen we daarvan kijken of de student is ingeschreven. -->
-<p>Je leerlingenid is {{ studentid }}.</p>
-<select name="les" id="les">
+<form action="/leerling_details/{{ studentid }}" method="POST">
+    <label for="lesid">Kies een vak:</label>
+    <select name="lesid" id="lesid">
     {% for les in lessen %}
         <option value="{{ les[1] }}">{{ les[0] }}</option>
     {% endfor %}
-</select>
+    </select>
+    <input type="submit" value="Zoek!">
+</form>
+
 <!--
-Deze query moeten we gebruiken om de aanwezigheid op te halen
-SELECT student.student_id, student.voornaam, CASE WHEN aanwezigheid.student_id IS NULL THEN 'Absent' ELSE 'Present' END AS attendance_status
-FROM student, les
-LEFT JOIN aanwezigheid ON student.student_id = aanwezigheid.student_id
-WHERE les.les_naam = 'Werkplaats' and les.start_date = '2019-01-01';
+Hier komt een tabel die aangevraagdelessen laat zien in een tabel. Als aangevraagdelessen leeg is, dan laten we niks zien.
 -->
+<!-- check of aangevraagdelessen leeg is -->
+<div class="tabel">
+{% if not aangevraagdelessen %}
+    <p>Zoek op een vak om te zien of de student er was of niet.</p>
+{% else %}
+    <h2> Dit is de aanwezigheid van {{ aangevraagdelessen[0][2] }} in het vak {{ aangevraagdelessen[0][3] }}</h2>
+    <table>
+        <tr>
+            <th>Datum en tijd</th>
+            <th>Aanwezigheid</th>
+        </tr>
+        {% for les in aangevraagdelessen %}
+            <tr>
+                <td>{{ les[0] }}</td>
+                {% if les[4] == "Present" %}
+                    <td style="background-color: greenyellow;">{{ les[4] }}</td>
+                {% else %}
+                    <td style="background-color: red;">{{ les[4] }}</td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+{% endif %}
+</div>
+
+{% include 'header.html' %}
 
 </body>
 </html>

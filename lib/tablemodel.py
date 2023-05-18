@@ -37,7 +37,13 @@ class DatabaseModel:
 
     def get_les_docent(self, docent_id):
         cursor = sqlite3.connect(self.database_file).cursor()
-        cursor.execute(f"SELECT * FROM `les` as pt LEFT JOIN `klas` as pb ON pt.klas_id = pb.klas_id WHERE docent_id = {docent_id}")
+        cursor.execute(f"SELECT * FROM `les` as pt LEFT JOIN `klas` as pb ON pt.klas_id = pb.klas_id WHERE docent_id = {docent_id} AND start_date >= CURRENT_DATE")
+        docent = cursor.fetchall()
+        return docent
+
+    def get_les_docent_old(self, docent_id):
+        cursor = sqlite3.connect(self.database_file).cursor()
+        cursor.execute(f"SELECT * FROM `les` as pt LEFT JOIN `klas` as pb ON pt.klas_id = pb.klas_id WHERE docent_id = {docent_id} AND start_date < CURRENT_DATE")
         docent = cursor.fetchall()
         return docent
 

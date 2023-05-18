@@ -16,7 +16,7 @@
 <div id="aanwezigform">
 <img src="/static/images/HRbackground.jpg" alt="hrlogo" width="250" height="150"><br><br>
 <h3>Login student!</h3>
-<label for="studentnummer">Studentnummer:</label><br><input type="number" id="studentnummer" name="studentnummer"><br>
+<label for="studentnummer">Studentnummer:</label><br><input type="number" id="studentnummer" name="studentnummer" ><br>
 <label for="name">Naam:</label><br><input type="text" id="name" name="name"><br>
 <label for="vraag">{{ content[2] }} <br><textarea id="vraag" name="vraag"></textarea></label><br>
 <button type="submit" onclick="post_aanwezigheid()">Submit</button>
@@ -50,8 +50,9 @@
             error: function (errMsg) {
                 console.log(errMsg)
             }
+            
         });
-    
+        alert("Uw aanwezigheid is geregistreerd!")
 }
 
 </script>

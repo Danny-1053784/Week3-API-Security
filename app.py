@@ -54,6 +54,12 @@ def meeting_docent():
     meeting_docent = dbm.get_les_docent(docent_id)
     return jsonify(meeting_docent)
 
+@app.route("/meeting_old", methods=["GET"])
+def meeting_docent_old():
+    docent_id=session['docent_id']  
+    meeting_docent = dbm.get_les_docent_old(docent_id)
+    return jsonify(meeting_docent)
+
 @app.route('/aanwezigheid/<lesid>', methods=["GET", "POST"])
 def aanwezigheid(lesid):
     content = dbm.get_table_content("Vraag", "les_id", lesid)

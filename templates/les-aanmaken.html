@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <!DOCTYPE html>
+ <!DOCTYPE html>
   <html lang="en">
   <head>
       <meta charset="UTF-8">
@@ -13,63 +11,11 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/static/les.css" type="text/css">
       
   </head>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
-
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-
-    .b-example-divider {
-      height: 3rem;
-      background-color: rgba(0, 0, 0, .1);
-      border: solid rgba(0, 0, 0, .15);
-      border-width: 1px 0;
-      box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
-    }
-
-    .b-example-vr {
-      flex-shrink: 0;
-      width: 1.5rem;
-      height: 100vh;
-    }
-
-    .bi {
-      vertical-align: -.125em;
-      fill: currentColor;
-    }
-
-    .nav-scroller {
-      position: relative;
-      z-index: 2;
-      height: 2.75rem;
-      overflow-y: hidden;
-    }
-
-    .nav-scroller .nav {
-      display: flex;
-      flex-wrap: nowrap;
-      padding-bottom: 1rem;
-      margin-top: -1px;
-      overflow-x: auto;
-      text-align: center;
-      white-space: nowrap;
-      -webkit-overflow-scrolling: touch;
-    }
-  </style>
 
 </head>
 
@@ -86,12 +32,12 @@
 
   <body>
     {% include 'sidebar.html' %}
-  <div class="container-fluid">
+  <div class="container-fluid" style="border-radius: 7px; background-color: #f2f2f2; padding: 50px;">
    
         <h1>Les aanmaken</h1>
       <div class="form-floating">
        <label>Naam van de les:</label>
-       <input type="text" name="les_naam" id="les_naam">
+       <input type="text" name="les_naam" id="les_naam" required>
       </div>
       <div class="form-floating">
        <label>Klas:</label>
@@ -110,7 +56,7 @@
       </div>
       <div class="form-floating">
         <label>Begin datum en tijd:</label>
-       <input type="datetime-local" id="start_date" name="start_date">
+       <input type="datetime-local" id="start_date" name="start_date"  >
       </div>
       <div class="form-floating">
        <label>Eind datum en tijd:</label>
@@ -119,28 +65,30 @@
        <input type="submit" name="next" value="Les toevoegen" onclick="submitLesInfo();">
    
        
-      
-       
       </div>
   </div>
   <script type="application/javascript">
+// set the minimum date to the current date
 
+let dateInput = document.getElementById("start_date");
+dateInput.min = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
+
+let endDateInput = document.getElementById("end_date");
+endDateInput.min = new Date().toISOString().slice(0,new Date().toISOString().lastIndexOf(":"));
+
+// store all values from the input fields in a variable(Danny)
 function submitLesInfo() {
   var klas_id = $('#klas_id_select').find(":selected").val();
-  // var klas_id = document.getElementById("klas_id");
-  // var klas_value = klas_id.value;
-  // console.log(klas_value)
-  console.log(klas_id)
 
   var les_naam = document.getElementById("les_naam").value;
   var lokaal = document.getElementById("lokaal").value;
   
- 
   var start_date = document.getElementById("start_date").value;
   var start_date = start_date.replace("T", " ");
   var end_date = document.getElementById("end_date").value;
   var end_date = end_date.replace("T", " ");
 
+  // store all values in an array(Danny)
   var server_data = [
     
     klas_id,
@@ -152,6 +100,7 @@ function submitLesInfo() {
   ] ;
    
   console.log(server_data)
+// send the array to app.py function to store in the database(Danny)
 
   $.ajax({
   type: "POST",
@@ -161,12 +110,14 @@ function submitLesInfo() {
   dataType: 'json',
   success: function(result) {
     
-    
     console.log("alle data" , server_data);
   
   } 
 });
+window.location.href = "/admin";
+
   }
+
 
   </script>
 

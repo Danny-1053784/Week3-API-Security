@@ -42,8 +42,9 @@ def login():
         if dbu.user_login(gebruikersnaam, wachtwoord):
             session['username'] = gebruikersnaam
             voornaam=session['docent_naam']
+            achternaam = session['docent_achternaam']
             return render_template(
-            "admin.html", voornaam=voornaam)
+            "admin.html", voornaam=voornaam, achternaam=achternaam)
         else:
             return redirect(url_for('index'))
 
@@ -51,6 +52,12 @@ def login():
 def meeting_docent():
     docent_id=session['docent_id']  
     meeting_docent = dbm.get_les_docent(docent_id)
+    return jsonify(meeting_docent)
+
+@app.route("/meeting_old", methods=["GET"])
+def meeting_docent_old():
+    docent_id=session['docent_id']  
+    meeting_docent = dbm.get_les_docent_old(docent_id)
     return jsonify(meeting_docent)
 
 @app.route('/aanwezigheid/<lesid>', methods=["GET", "POST"])
@@ -78,8 +85,12 @@ def aanwezigheid_post(lesid = None):
     antwoord_vraag = output["vraag"]
     print("We gaan nu de output printen")
     print(output)
-    dbm.insert_aanwezigheid(studentnummer, lesid, antwoord_vraag)
-    return output
+    student_id_raw = dbm.get_student_id(studentnummer)
+    student_id = ','.join(str(x) for x in student_id_raw)
+
+    print(student_id)
+    dbm.insert_aanwezigheid(student_id, lesid, antwoord_vraag)
+    return render_template('admin.html' , lesid=lesid)
 
 
 @app.route('/set_student_aanwezig', methods=['GET', 'POST'])
@@ -92,13 +103,15 @@ def set_student_aanwezig():
         print(aanwezigheid_data)
         return ("je staat aanwezig")
     
-
+# route voor de docent om een les aan te maken (Danny)
 @app.route('/les-aanmaken')
 def lesAanmaken():
     voornaam=session['docent_naam']
+    achternaam = session['docent_achternaam']
     klas = dbm.read_klas_name_update()
-    return render_template('les-aanmaken.html', voornaam=voornaam,klas=klas)
+    return render_template('les-aanmaken.html', voornaam=voornaam,achternaam=achternaam,klas=klas)
 
+# insert les docent (Danny)
 @app.route('/les_aanmaken_post', methods=['POST', 'GET'])
 def les_aanmaken_docent():
   if request.method == "POST":
@@ -119,12 +132,13 @@ def les_aanmaken_docent():
 
 
     return ("les aangemaakt")
-
+# Route for the dashboard with user authentication (Danny)
 @app.route('/admin')
 def admin():
     if 'username' in session:
         voornaam=session['docent_naam']
-        return render_template('admin.html', voornaam=voornaam)
+        achternaam = session['docent_achternaam']
+        return render_template('admin.html', voornaam=voornaam, achternaam=achternaam)
     else:
         return redirect(url_for('index'))
 

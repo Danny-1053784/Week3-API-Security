@@ -21,11 +21,13 @@ python app.py
 - Wachtwoord: Tjidde321!
 
 # Aanmelden student
+Na het toevoegen van een vraag opent de browser een nieuwe tablad met daarin de login van de student
+
 voor het aanmelden als student gebruik je een studenten nummer bijvoorbeeld: 
 
-Studentennummer: 1053784
-Naam: Danny
-antwoord vraag: Ja
+- Studentennummer: 1053784
+- Naam: Danny
+- antwoord vraag: Ja
 
 # Studenten 
 er staan tot nu toe 3 studenten in de database:

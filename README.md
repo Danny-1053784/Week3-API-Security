@@ -64,9 +64,7 @@ INSERT INTO Vraag (vraag_id, les_id, vraag) VALUES ('{vraag_id}', {lesid}, '{vra
 ```
 
 Kortom, eerst deleten en dan inserten. Ik ben er niet blij mee, maar het werkt wel. 
-# Bronnen
-- https://getbootstrap.com/
-- https://getbootstrap.com/docs/5.2/examples/
+
 
 # [leerling_details](templates/leerling_details.html) (wouter)
 Ik ga het er snel over hebben wat voor werk is gegaan in de leerling_details pagina. 
@@ -108,3 +106,9 @@ meegeven aan de pagina
             return render_template("leerling_details.html", studentid=studentid, lessen=lessen, aangevraagdelessen=aangevraagdelessen)
 ```
 In geval van vargen, stuur me een berichtje op Discord of Whatsapp.
+
+
+# Bronnen
+- https://getbootstrap.com/
+- https://getbootstrap.com/docs/5.2/examples/
+- Github Copilot (voor het afronden van snippets)

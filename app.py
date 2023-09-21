@@ -7,6 +7,8 @@ from flask import Flask, render_template, redirect, request, send_from_directory
 from lib.tablemodel import DatabaseModel
 from lib.loginmodel import UserDatabaseModel
 
+import os
+keycode = os.urandom(12).hex()
 
 
 LISTEN_ALL = "0.0.0.0"
@@ -15,7 +17,7 @@ FLASK_PORT = 81
 FLASK_DEBUG = False
 
 app = Flask(__name__)
-app.secret_key = "ImTheOneAndOnlyLegendaryPatatoFarmer69"
+app.secret_key = keycode
 
 # This command creates the "<application directory>" path
 DATABASE_FILE = os.path.join(app.root_path, 'databases', 'aanwezigheid.db')
@@ -199,7 +201,7 @@ def vraagles(lesid = None):
     print(vraag)
     print(lesid)
     dbm.insert_vraag(lesid, vraag)
-    return ("De vraag is toegevoegd aan les ")
+    return ("De vraag is toegevoegd aan de les ")
 
 
 @app.route('/logout')

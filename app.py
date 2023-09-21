@@ -2,7 +2,7 @@ import os.path
 
 import sys
 from flask import Flask, render_template, redirect, request, send_from_directory, jsonify, session ,url_for, abort, make_response
-
+from flask_wtf import CSRFProtect
 
 from lib.tablemodel import DatabaseModel
 from lib.loginmodel import UserDatabaseModel
@@ -18,7 +18,7 @@ FLASK_DEBUG = False
 
 app = Flask(__name__)
 app.secret_key = keycode
-
+csrf = CSRFProtect(app)
 # This command creates the "<application directory>" path
 DATABASE_FILE = os.path.join(app.root_path, 'databases', 'aanwezigheid.db')
 

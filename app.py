@@ -199,7 +199,7 @@ def vraagles(lesid = None):
     print(vraag)
     print(lesid)
     dbm.insert_vraag(lesid, vraag)
-    return "De vraag " + vraag + " is toegevoegd aan les " + lesid
+    return ("De vraag is toegevoegd aan les ")
 
 
 @app.route('/logout')

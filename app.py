@@ -34,6 +34,8 @@ dbu = UserDatabaseModel(USER_DATABASE_FILE)
 def index():
     response = make_response(render_template('index.html'))
     response.headers['Content-Security-Policy'] = "default-src 'self'"
+    response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+    response.headers['Server'] = ''
     return response
 
 # Login function with username session and redirect (Danny)

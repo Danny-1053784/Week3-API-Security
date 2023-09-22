@@ -10,6 +10,9 @@ body {
   padding-bottom: 40px;
   background-color: white;
 }
+.form-signin.w-100.m-auto {
+  margin: auto;
+}
 img.mb-4 {
   right: 10%;
   position: relative;

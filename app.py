@@ -32,7 +32,9 @@ dbu = UserDatabaseModel(USER_DATABASE_FILE)
 #Login as landing page
 @app.route("/")
 def index():
-    return render_template("index.html")
+    response = make_response(render_template('index.html'))
+    response.headers['Content-Security-Policy'] = "default-src 'self'"
+    return response
 
 # Login function with username session and redirect (Danny)
 @app.route('/login', methods=["POST", "GET"])

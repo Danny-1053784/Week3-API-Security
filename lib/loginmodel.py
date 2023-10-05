@@ -12,10 +12,10 @@ class UserDatabaseModel:
             raise FileNotFoundError(f"Could not find database file: {user_database_file}")
 
     # Login function (Danny)  
-    def user_login(self,gebruikersnaam, wachtwoord):
+    def user_login(self,gebruikersnaam, hashed_password):
             con = sqlite3.connect(self.user_database_file)
             cur = con.cursor()
-            cur.execute('Select docent_id,gebruikersnaam,wachtwoord,voornaam,achternaam FROM docent WHERE gebruikersnaam=? and wachtwoord=?', (gebruikersnaam, wachtwoord))
+            cur.execute('Select docent_id,gebruikersnaam,wachtwoord,voornaam,achternaam FROM docent WHERE gebruikersnaam=? and wachtwoord=?', (gebruikersnaam, hashed_password))
             
             result = cur.fetchone()
             if result:

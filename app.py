@@ -48,10 +48,10 @@ def login():
         hash = hashlib.sha1(wachtwoord.encode())
         print(hash)
         hashed_password = hash.hexdigest()
-
         print(hashed_password)
-        print(dbu.user_login(gebruikersnaam, wachtwoord))
-        if dbu.user_login(gebruikersnaam, wachtwoord):
+
+       
+        if dbu.user_login(gebruikersnaam, hashed_password):
             session['username'] = gebruikersnaam
             voornaam=session['docent_naam']
             achternaam = session['docent_achternaam']

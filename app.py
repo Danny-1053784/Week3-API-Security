@@ -46,6 +46,10 @@ def login():
         gebruikersnaam = request.form['gebruikersnaam']
         wachtwoord = request.form['wachtwoord']
         hash = hashlib.sha1(wachtwoord.encode())
+        print(hash)
+        hashed_password = hash.hexdigest()
+
+        print(hashed_password)
         print(dbu.user_login(gebruikersnaam, wachtwoord))
         if dbu.user_login(gebruikersnaam, wachtwoord):
             session['username'] = gebruikersnaam
